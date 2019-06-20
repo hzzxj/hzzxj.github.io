@@ -96,14 +96,18 @@
 
 
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="docker-redis">
+  <meta name="description" content="官方文档链接https://hub.docker.com/_/redis docker官方镜像(镜像名:版本号，默认latest)1docker pull redis:5.0.4  docker中国镜像加速(官方镜像慢的话可以用这个)1docker pull registry.docker-cn.com/library/redis  查看镜像列表1docker images  简单启动容器1doc">
+<meta name="keywords" content="docker,redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker部署redis">
 <meta property="og:url" content="http://yoursite.com/2019/06/20/docker-redis/index.html">
 <meta property="og:site_name" content="hzzxj">
+<meta property="og:description" content="官方文档链接https://hub.docker.com/_/redis docker官方镜像(镜像名:版本号，默认latest)1docker pull redis:5.0.4  docker中国镜像加速(官方镜像慢的话可以用这个)1docker pull registry.docker-cn.com/library/redis  查看镜像列表1docker images  简单启动容器1doc">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-20T01:24:52.648Z">
+<meta property="og:updated_time" content="2019-06-20T03:52:39.456Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docker-redis">
+<meta name="twitter:title" content="docker部署redis">
+<meta name="twitter:description" content="官方文档链接https://hub.docker.com/_/redis docker官方镜像(镜像名:版本号，默认latest)1docker pull redis:5.0.4  docker中国镜像加速(官方镜像慢的话可以用这个)1docker pull registry.docker-cn.com/library/redis  查看镜像列表1docker images  简单启动容器1doc">
 
 
 
@@ -121,7 +125,7 @@
   };
 </script>
 
-  <title>docker-redis | hzzxj</title>
+  <title>docker部署redis | hzzxj</title>
   
 
 
@@ -354,7 +358,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">docker-redis
+          <h1 class="post-title" itemprop="name headline">docker部署redis
 
               
             
@@ -380,12 +384,34 @@
                 
               
 
-              <time title="创建时间：2019-06-20 09:24:52" itemprop="dateCreated datePublished" datetime="2019-06-20T09:24:52+08:00">2019-06-20</time>
+              <time title="创建时间：2019-06-20 09:24:52 / 修改时间：11:52:39" itemprop="dateCreated datePublished" datetime="2019-06-20T09:24:52+08:00">2019-06-20</time>
             
 
+            
+              
+
+              
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -422,7 +448,21 @@
       
 
       
-        
+        <h3 id="官方文档链接"><a href="#官方文档链接" class="headerlink" title="官方文档链接"></a>官方文档链接</h3><p><a href="https://hub.docker.com/_/redis" target="_blank" rel="noopener">https://hub.docker.com/_/redis</a></p>
+<h3 id="docker官方镜像-镜像名-版本号，默认latest"><a href="#docker官方镜像-镜像名-版本号，默认latest" class="headerlink" title="docker官方镜像(镜像名:版本号，默认latest)"></a>docker官方镜像(镜像名:版本号，默认latest)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis:5.0.4</span><br></pre></td></tr></table></figure>
+
+<h3 id="docker中国镜像加速-官方镜像慢的话可以用这个"><a href="#docker中国镜像加速-官方镜像慢的话可以用这个" class="headerlink" title="docker中国镜像加速(官方镜像慢的话可以用这个)"></a>docker中国镜像加速(官方镜像慢的话可以用这个)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry.docker-cn.com/library/redis</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看镜像列表"><a href="#查看镜像列表" class="headerlink" title="查看镜像列表"></a>查看镜像列表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<h3 id="简单启动容器"><a href="#简单启动容器" class="headerlink" title="简单启动容器"></a>简单启动容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd -p 6380:6379 –name=<span class="string">"redis"</span> docker.io/redis</span><br></pre></td></tr></table></figure>
+
+<p>-it：以交互模式运行容器，并为容器分配一个伪终端<br>-p：端口映射，主机端口:容器端口<br>–name：为容器指定名称</p>
+<h3 id="挂载外部配置及数据持久化"><a href="#挂载外部配置及数据持久化" class="headerlink" title="挂载外部配置及数据持久化"></a>挂载外部配置及数据持久化</h3><h4 id="修改redis-conf"><a href="#修改redis-conf" class="headerlink" title="修改redis.conf"></a>修改redis.conf</h4><p>  daemonize no：注释掉注释掉注释掉（用守护线程启动）<br>  requirepass：设置密码<br>  bind：限制ip访问，注释掉<br>  appendonly yes：数据持久化</p>
+<h4 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd --privileged=<span class="literal">true</span> -p 6379:6379 -v /root/redis/redis.conf:/usr/<span class="built_in">local</span>/etc/redis/redis.conf -v /root/redis/data:/data  --name redis redis:5.0.4 redis-server /usr/<span class="built_in">local</span>/etc/redis/redis.conf --appendonly yes</span><br></pre></td></tr></table></figure>
+
+<p>redis-server …：按照指定配置文件启动<br>–appendonly yes：数据持久化<br>上面的配置文件路径（根据实际情况修改）：/root/redis/redis.conf<br>上面的挂载持久化路径（根据实际情况修改）：/root/redis/data</p>
+
       
     </div>
 
@@ -443,6 +483,17 @@
 
     <footer class="post-footer">
       
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+        </div>
+      
 
       
       
@@ -452,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/19/docker-install/" rel="next" title="docker安装">
-                <i class="fa fa-chevron-left"></i> docker安装
+              <a href="/2019/06/19/docker-postgresql/" rel="next" title="docker部署postgres">
+                <i class="fa fa-chevron-left"></i> docker部署postgres
               </a>
             
           </div>
@@ -504,8 +555,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -522,7 +582,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -534,14 +594,16 @@
                 <div class="site-state-item site-state-categories">
                   
                     
+                      <a href="/categories/">
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">2</span>
-                    <span class="site-state-item-name">分类</span>
                   
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
                 </div>
               
 
@@ -549,6 +611,10 @@
                 
                 
                 <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
                   
                     
                     
@@ -560,7 +626,7 @@
                     
                     <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">标签</span>
-                  
+                  </a>
                 </div>
               
             </nav>
@@ -643,6 +709,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方文档链接"><span class="nav-number">1.</span> <span class="nav-text">官方文档链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker官方镜像-镜像名-版本号，默认latest"><span class="nav-number">2.</span> <span class="nav-text">docker官方镜像(镜像名:版本号，默认latest)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker中国镜像加速-官方镜像慢的话可以用这个"><span class="nav-number">3.</span> <span class="nav-text">docker中国镜像加速(官方镜像慢的话可以用这个)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看镜像列表"><span class="nav-number">4.</span> <span class="nav-text">查看镜像列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单启动容器"><span class="nav-number">5.</span> <span class="nav-text">简单启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载外部配置及数据持久化"><span class="nav-number">6.</span> <span class="nav-text">挂载外部配置及数据持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改redis-conf"><span class="nav-number">6.1.</span> <span class="nav-text">修改redis.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动容器"><span class="nav-number">6.2.</span> <span class="nav-text">启动容器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
