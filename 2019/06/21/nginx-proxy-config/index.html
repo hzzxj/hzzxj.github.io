@@ -96,19 +96,19 @@
 
 
 
-  <meta name="description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入">
+  <meta name="description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入  events块该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：  设置网络连接的序列化 是否允许同时接收多个网络连接 事件驱动模型的选择 最大连接数">
 <meta name="keywords" content="nginx,proxy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx反向代理、静态资源、负载均衡配置">
 <meta property="og:url" content="http://yoursite.com/2019/06/21/nginx-proxy-config/index.html">
 <meta property="og:site_name" content="hzzxj">
-<meta property="og:description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入">
+<meta property="og:description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入  events块该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：  设置网络连接的序列化 是否允许同时接收多个网络连接 事件驱动模型的选择 最大连接数">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/nginx.png">
-<meta property="og:updated_time" content="2019-06-21T08:04:57.035Z">
+<meta property="og:updated_time" content="2019-06-21T09:21:25.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx反向代理、静态资源、负载均衡配置">
-<meta name="twitter:description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入">
+<meta name="twitter:description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入  events块该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：  设置网络连接的序列化 是否允许同时接收多个网络连接 事件驱动模型的选择 最大连接数">
 <meta name="twitter:image" content="http://yoursite.com/images/nginx.png">
 
 
@@ -386,7 +386,7 @@
                 
               
 
-              <time title="创建时间：2019-06-21 11:45:12 / 修改时间：16:04:57" itemprop="dateCreated datePublished" datetime="2019-06-21T11:45:12+08:00">2019-06-21</time>
+              <time title="创建时间：2019-06-21 11:45:12 / 修改时间：17:21:25" itemprop="dateCreated datePublished" datetime="2019-06-21T11:45:12+08:00">2019-06-21</time>
             
 
             
@@ -459,6 +459,32 @@
 <li>错误日志的存放路径</li>
 <li>配置文件的引入</li>
 </ul>
+<h4 id="events块"><a href="#events块" class="headerlink" title="events块"></a>events块</h4><p>该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：</p>
+<ul>
+<li>设置网络连接的序列化</li>
+<li>是否允许同时接收多个网络连接</li>
+<li>事件驱动模型的选择</li>
+<li>最大连接数的配置</li>
+</ul>
+<h4 id="http块"><a href="#http块" class="headerlink" title="http块"></a>http块</h4><ul>
+<li>定义MIMI-Type</li>
+<li>自定义服务日志</li>
+<li>允许sendfile方式传输文件</li>
+<li>连接超时时间</li>
+<li>单连接请求数上限</li>
+</ul>
+<h4 id="server块"><a href="#server块" class="headerlink" title="server块"></a>server块</h4><ul>
+<li>配置网络监听</li>
+<li>基于名称的虚拟主机配置</li>
+<li>基于IP的虚拟主机配置</li>
+</ul>
+<h4 id="location块"><a href="#location块" class="headerlink" title="location块"></a>location块</h4><ul>
+<li>location配置</li>
+<li>请求根目录配置</li>
+<li>更改location的URI</li>
+<li>网站默认首页配置</li>
+</ul>
+<h3 id="各指令含义"><a href="#各指令含义" class="headerlink" title="各指令含义"></a>各指令含义</h3><p>未完待续…</p>
 
       
     </div>
@@ -729,7 +755,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx配置文件结构"><span class="nav-number">1.</span> <span class="nav-text">nginx配置文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局块（main）"><span class="nav-number">1.1.</span> <span class="nav-text">全局块（main）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx配置文件结构"><span class="nav-number">1.</span> <span class="nav-text">nginx配置文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局块（main）"><span class="nav-number">1.1.</span> <span class="nav-text">全局块（main）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#events块"><span class="nav-number">1.2.</span> <span class="nav-text">events块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http块"><span class="nav-number">1.3.</span> <span class="nav-text">http块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#server块"><span class="nav-number">1.4.</span> <span class="nav-text">server块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#location块"><span class="nav-number">1.5.</span> <span class="nav-text">location块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各指令含义"><span class="nav-number">2.</span> <span class="nav-text">各指令含义</span></a></li></ol></div>
             
 
           </div>
