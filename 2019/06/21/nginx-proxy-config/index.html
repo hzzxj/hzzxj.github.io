@@ -105,7 +105,7 @@
 <meta property="og:description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入  events块该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：  设置网络连接的序列化 是否允许同时接收多个网络连接 事件驱动模型的选择 最大连接数">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/nginx.png">
-<meta property="og:updated_time" content="2019-06-28T09:50:02.619Z">
+<meta property="og:updated_time" content="2019-06-28T09:53:33.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx反向代理、静态资源、负载均衡配置">
 <meta name="twitter:description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入  events块该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：  设置网络连接的序列化 是否允许同时接收多个网络连接 事件驱动模型的选择 最大连接数">
@@ -403,7 +403,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-28 17:50:02" itemprop="dateModified" datetime="2019-06-28T17:50:02+08:00">2019-06-28</time>
+                <time title="修改时间：2019-06-28 17:53:33" itemprop="dateModified" datetime="2019-06-28T17:53:33+08:00">2019-06-28</time>
               
             
           </span>
@@ -541,7 +541,7 @@
 </li>
 </ul>
 <p>上面配置效果：<br>   -<a href="http://192.168.3.123:80/zxj/xxx" target="_blank" rel="noopener">http://192.168.3.123:80/zxj/xxx</a>  =&gt; 192.168.3.123该服务器下 /opt/resource/myweb/目录下xxx<br>   -<a href="http://192.168.3.123:80/ccc/xxx" target="_blank" rel="noopener">http://192.168.3.123:80/ccc/xxx</a>  =&gt; <a href="http://192.168.3.124:8081/ccc/xxx" target="_blank" rel="noopener">http://192.168.3.124:8081/ccc/xxx</a> 或 <a href="http://192.168.3.125:8081/ccc/xxx" target="_blank" rel="noopener">http://192.168.3.125:8081/ccc/xxx</a> （比例3:4，ccc处不能为zxj，会匹配到上一个）</p>
-<p>小服务器，暂时不用考虑性能优化了。有时间再去研究研究~</p>
+<p>alias那里也可以用root，试了一些配置路径都没映射成功，马克一下。<br>小服务器，暂时不用考虑性能优化了。有时间再去研究研究~</p>
 
       
     </div>
