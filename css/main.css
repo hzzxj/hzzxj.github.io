@@ -1767,7 +1767,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5db433;
+  background: #8ff;
 }
 .feed-link,
 .chat {
@@ -2822,4 +2822,14 @@ ul.breadcrumb li+li:last-child {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.post-body p a {
+  color: #075dc4;
+  border-bottom: none;
+  border-bottom: 1px solid #075dc4;
+}
+.post-body p a:hover {
+  color: #fc6423;
+  border-bottom: none;
+  border-bottom: 1px solid #fc6423;
 }
