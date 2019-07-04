@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[git-cmd]]></title>
+    <url>%2F2019%2F07%2F03%2Fgit-cmd%2F</url>
+    <content type="text"><![CDATA[git 常用命令git add 文件名：追踪指定文件git add .：追踪所有文件git commit -m ‘注释’：提交到本地仓库git push：推送远程仓库git pull：拉取git status：查看当前提交状态git branch：查看分支git branch 分支名：创建分支，不切换git branch -d：删除分支git checkout 分支名：切换到某个分支git checkout -b 分支名：创建分支，并切换到该分支git merge 分支名：合并分支git reset HEAD – file：清空add命令向暂存区提交的关于file文件的修改git reset –hard HEAD：版本回退git reflog：查看所有操作日志git stash：将文件放入暂存区git stash list：查看暂存区文件git stash applly 暂存区id：将文件从暂存区取出git stash pop：将文件从暂存区取出,并删除暂存区的文件git stash clear：清除暂存区git stash branch 分支名称：暂存区创建分支git diff 文件名：比较工作目录和暂存区的不同git diff –cached 文件名：比较暂存区和远程仓库的不同git diff commitID 文件名：比较工作目录和远程仓库的不同git tag -a 标签名称 -m ‘注释’：创建标签git tag：查看标签git push origin 标签名称：推送标签到远程仓库git push origin –tags：推送所有的标签到远程仓库]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git常用命令</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[java-ArrayList根据某个属性去重]]></title>
     <url>%2F2019%2F07%2F01%2Fjava-removal%2F</url>
-    <content type="text"><![CDATA[实体类12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152public class Student&#123; private String sno; private String name; private int sex; public Student(String sno, String name, int sex) &#123; this.sno = sno; this.name = name; this.sex = sex; &#125; public String getName() &#123; return name; &#125; public void setName(String name) &#123; this.name = name; &#125; public String getSno() &#123; return sno; &#125; public void setSno(String sno) &#123; this.sno = sno; &#125; public int getSex() &#123; return sex; &#125; public void setSex(int sex) &#123; this.sex = sex; &#125; @Override public String toString() &#123; return "Student [name=" + name + ", sno=" + sno + ", sex=" + sex + "]"; &#125;&#125; 根据sno字段去重1234567891011List&lt;Student&gt; list = new ArrayList&lt;Student&gt;();for (int i = 0; i &lt; 3; i++)&#123; list.add(new Student("123", "name", 1));&#125;list = list.stream().collect( Collectors.collectingAndThen( Collectors.toCollection(() -&gt; new TreeSet&lt;&gt;(Comparator.comparing(Student::getSno))), ArrayList::new));]]></content>
+    <content type="text"><![CDATA[实体类12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152public class Student&#123; private String sno; private String name; private int sex; public Student(String sno, String name, int sex) &#123; this.sno = sno; this.name = name; this.sex = sex; &#125; public String getName() &#123; return name; &#125; public void setName(String name) &#123; this.name = name; &#125; public String getSno() &#123; return sno; &#125; public void setSno(String sno) &#123; this.sno = sno; &#125; public int getSex() &#123; return sex; &#125; public void setSex(int sex) &#123; this.sex = sex; &#125; @Override public String toString() &#123; return "Student [name=" + name + ", sno=" + sno + ", sex=" + sex + "]"; &#125;&#125; 根据sno字段去重1234567891011List&lt;Student&gt; list = new ArrayList&lt;Student&gt;();for (int i = 0; i &lt; 3; i++)&#123; list.add(new Student("123", "name", i));&#125;list = list.stream().collect( Collectors.collectingAndThen( Collectors.toCollection(() -&gt; new TreeSet&lt;&gt;(Comparator.comparing(Student::getSno))), ArrayList::new));]]></content>
       <categories>
         <category>java</category>
       </categories>
