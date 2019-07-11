@@ -96,20 +96,18 @@
 
 
 
-  <meta name="description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入  events块该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：  设置网络连接的序列化 是否允许同时接收多个网络连接 事件驱动模型的选择 最大连接数">
-<meta name="keywords" content="nginx,proxy">
+  <meta name="description" content="软件设计模式的概念和意义 软件设计模式的概念软件设计模式（Software Design Pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。它描述了在软件设计过程中的一些不断发生的问题，以及该问题的解决方案。也就是说，它是解决特定问题的一系列套路，是前辈们的代码设计经验的总结，具有一定的普遍性，可以反复使用。其目的是为了提高代码的可重用性、代码的可">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx反向代理、静态资源、负载均衡配置">
-<meta property="og:url" content="http://yoursite.com/2019/06/21/nginx-proxy-config/index.html">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="http://yoursite.com/2019/07/10/design-pattern/index.html">
 <meta property="og:site_name" content="hzzxj">
-<meta property="og:description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入  events块该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：  设置网络连接的序列化 是否允许同时接收多个网络连接 事件驱动模型的选择 最大连接数">
+<meta property="og:description" content="软件设计模式的概念和意义 软件设计模式的概念软件设计模式（Software Design Pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。它描述了在软件设计过程中的一些不断发生的问题，以及该问题的解决方案。也就是说，它是解决特定问题的一系列套路，是前辈们的代码设计经验的总结，具有一定的普遍性，可以反复使用。其目的是为了提高代码的可重用性、代码的可">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/nginx.png">
-<meta property="og:updated_time" content="2019-07-01T02:22:27.364Z">
+<meta property="og:updated_time" content="2019-07-11T07:01:46.660Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nginx反向代理、静态资源、负载均衡配置">
-<meta name="twitter:description" content="nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分：  配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入  events块该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：  设置网络连接的序列化 是否允许同时接收多个网络连接 事件驱动模型的选择 最大连接数">
-<meta name="twitter:image" content="http://yoursite.com/images/nginx.png">
+<meta name="twitter:title" content="设计模式">
+<meta name="twitter:description" content="软件设计模式的概念和意义 软件设计模式的概念软件设计模式（Software Design Pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。它描述了在软件设计过程中的一些不断发生的问题，以及该问题的解决方案。也就是说，它是解决特定问题的一系列套路，是前辈们的代码设计经验的总结，具有一定的普遍性，可以反复使用。其目的是为了提高代码的可重用性、代码的可">
 
 
 
@@ -117,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/06/21/nginx-proxy-config/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/10/design-pattern/">
 
 
 
@@ -127,7 +125,7 @@
   };
 </script>
 
-  <title>nginx反向代理、静态资源、负载均衡配置 | hzzxj</title>
+  <title>设计模式 | hzzxj</title>
   
 
 
@@ -372,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/21/nginx-proxy-config/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/design-pattern/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="hzzxj">
@@ -389,7 +387,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">nginx反向代理、静态资源、负载均衡配置
+          <h1 class="post-title" itemprop="name headline">设计模式
 
               
             
@@ -415,7 +413,7 @@
                 
               
 
-              <time title="创建时间：2019-06-21 11:45:12" itemprop="dateCreated datePublished" datetime="2019-06-21T11:45:12+08:00">2019-06-21</time>
+              <time title="创建时间：2019-07-10 11:35:37" itemprop="dateCreated datePublished" datetime="2019-07-10T11:35:37+08:00">2019-07-10</time>
             
 
             
@@ -432,7 +430,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-01 10:22:27" itemprop="dateModified" datetime="2019-07-01T10:22:27+08:00">2019-07-01</time>
+                <time title="修改时间：2019-07-11 15:01:46" itemprop="dateModified" datetime="2019-07-11T15:01:46+08:00">2019-07-11</time>
               
             
           </span>
@@ -449,7 +447,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/nginx/" itemprop="url" rel="index"><span itemprop="name">nginx</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
 
                 
                 
@@ -491,86 +489,193 @@
       
 
       
-        <h3 id="nginx配置文件结构"><a href="#nginx配置文件结构" class="headerlink" title="nginx配置文件结构"></a>nginx配置文件结构</h3><p><img src="/images/nginx.png" alt></p>
-<h4 id="全局块（main）"><a href="#全局块（main）" class="headerlink" title="全局块（main）"></a>全局块（main）</h4><p>该部分配置主要影响Nginx全局，通常包括下面几个部分：</p>
+        <h3 id="软件设计模式的概念和意义"><a href="#软件设计模式的概念和意义" class="headerlink" title="软件设计模式的概念和意义"></a>软件设计模式的概念和意义</h3><ol>
+<li><p>软件设计模式的概念<br>软件设计模式（Software Design Pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。它描述了在软件设计过程中的一些不断发生的问题，以及该问题的解决方案。也就是说，它是解决特定问题的一系列套路，是前辈们的代码设计经验的总结，具有一定的普遍性，可以反复使用。其目的是为了提高代码的可重用性、代码的可读性和代码的可靠性。</p>
+</li>
+<li><p>学习设计模式的意义<br>设计模式的本质是面向对象设计原则的实际运用、是对类的封装性、继承性和多态性以及类的关联关系和组合关系的充分理解。正确使用设计模式具有以下优点：</p>
+</li>
+</ol>
 <ul>
-<li>配置运行Nginx服务器用户（组）</li>
-<li>worker process数</li>
-<li>Nginx进程PID存放路径</li>
-<li>错误日志的存放路径</li>
-<li>配置文件的引入</li>
+<li>可以提高程序员的思维能力、编程能力和设计能力。</li>
+<li>使程序设计更加标准化、代码编制更加工程化，使软件开发效率大大提高，从而缩短软件的开发周期。</li>
+<li>使设计的代码的可重用性高、可读性强、可靠性高、灵活性好、可维护性强。<br>当然，软件设计模式只是一个引导。在具体的软件幵发中，必须根据设计的应用系统的特点和要求来恰当选择。对于简单的程序开发，苛能写一个简单的算法要比引入某种设计模式更加容易。但对大项目的开发或者框架设计，用设计模式来组织代码显然更好。</li>
 </ul>
-<h4 id="events块"><a href="#events块" class="headerlink" title="events块"></a>events块</h4><p>该部分配置主要影响Nginx服务器与用户的网络连接，主要包括：</p>
-<ul>
-<li>设置网络连接的序列化</li>
-<li>是否允许同时接收多个网络连接</li>
-<li>事件驱动模型的选择</li>
-<li>最大连接数的配置</li>
-</ul>
-<h4 id="http块"><a href="#http块" class="headerlink" title="http块"></a>http块</h4><ul>
-<li>定义MIMI-Type</li>
-<li>自定义服务日志</li>
-<li>允许sendfile方式传输文件</li>
-<li>连接超时时间</li>
-<li>单连接请求数上限</li>
-</ul>
-<h4 id="server块"><a href="#server块" class="headerlink" title="server块"></a>server块</h4><ul>
-<li>配置网络监听</li>
-<li>基于名称的虚拟主机配置</li>
-<li>基于IP的虚拟主机配置</li>
-</ul>
-<h4 id="location块"><a href="#location块" class="headerlink" title="location块"></a>location块</h4><ul>
-<li>location配置</li>
-<li>请求根目录配置</li>
-<li>更改location的URI</li>
-<li>网站默认首页配置</li>
-</ul>
-<h3 id="简单的配置（基本都是默认配置）"><a href="#简单的配置（基本都是默认配置）" class="headerlink" title="简单的配置（基本都是默认配置）"></a>简单的配置（基本都是默认配置）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</span><br><span class="line"></span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_min_length 1k;</span><br><span class="line">    gzip_buffers 4 16k;</span><br><span class="line">    #gzip_http_version 1.0;</span><br><span class="line">    gzip_comp_level 2;</span><br><span class="line">    gzip_types text/plain application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br><span class="line">    gzip_vary off;</span><br><span class="line">    gzip_disable &quot;MSIE [1-6]\.&quot;;</span><br><span class="line"></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>user nginx：运行Nginx服务器用户/组 user nobody nobody则默认所有用户都可以启动Nginx进程</p>
+<h3 id="软件设计模式的基本要素"><a href="#软件设计模式的基本要素" class="headerlink" title="软件设计模式的基本要素"></a>软件设计模式的基本要素</h3><p>软件设计模式使人们可以更加简单方便地复用成功的设计和体系结构，它通常包含以下几个基本要素：模式名称、别名、动机、问题、解决方案、效果、结构、模式角色、合作关系、实现方法、适用性、已知应用、例程、模式扩展和相关模式等，其中最关键的元素包括以下4个主要部分。</p>
+<ol>
+<li><p>模式名称<br>每一个模式都有自己的名称，通常用一两个词来描述，可以根据模式的问题、特点、解决方案、功能和效果来命名。模式名称（PatternName）有助于我们理解和记忆该模式，也方便我们来讨论自己的设计。</p>
 </li>
-<li><p>worker_processes：进程数，Nginx服务器实现并发处理服务的关键</p>
+<li><p>问题<br>问题（Problem）描述了该模式的应用环境，即何时使用该模式。它解释了设计问题和问题存在的前因后果，以及必须满足的一系列先决条件。</p>
 </li>
-<li><p>error_log：错误日志存放路径</p>
+<li><p>解决方案<br>模式问题的解决方案（Solution）包括设计的组成部分、它们之间的相互关系及各自的职责和协作方式。因为模式就像一个模板，可应用于多种不同场合，所以解决方案并不描述一个特定而具体的设计或实现，而是提供实际问题的抽象描述和怎样用一个具有一般意义的元素组合（类或对象的组合）来解决这个问题。</p>
 </li>
-<li><p>pid：Nginx进程是作为系统守护进程在运行，需要在某文件中保存当前运行程序的主进程号，Nginx支持该保存文件路径的自定义</p>
+<li><p>效果<br>描述了模式的应用效果以及使用该模式应该权衡的问题，即模式的优缺点。主要是对时间和空间的衡量，以及该模式对系统的灵活性、扩充性、可移植性的影响，也考虑其实现问题。显式地列出这些效果（Consequence）对理解和评价这些模式有很大的帮助。</p>
 </li>
-<li><p>worker_connections：每一个worker process可以同时开启的最大连接数</p>
+</ol>
+<h3 id="分类和功能"><a href="#分类和功能" class="headerlink" title="分类和功能"></a>分类和功能</h3><p>设计模式有两种分类方法，即根据模式的目的来分和根据模式的作用的范围来分。</p>
+<ol>
+<li>根据目的来分<ol>
+<li>创建型模式：用于描述“怎样创建对象”，它的主要特点是“将对象的创建与使用分离”。（单例、原型、工厂方法、抽象工厂、建造者）</li>
+<li>结构型模式：用于描述如何将类或对象按某种布局组成更大的结构。（代理、适配器、桥接、装饰、外观、享元、组合）。</li>
+<li>行为型模式：用于描述类或对象之间怎样相互协作共同完成单个对象都无法单独完成的任务，以及怎样分配职责。（模板方法、策略、命令、职责链、状态、观察者、中介者、迭代器、访问者、备忘录、解释器）</li>
+</ol>
 </li>
-<li><p>include  default_type：MIME-Type指的是网络资源的媒体类型，即前端请求的资源类型，include指令将mime.types文件包含进来</p>
+</ol>
+<ol start="2">
+<li>根据作用范围来分<ol>
+<li>类模式：用于处理类与子类之间的关系，这些关系通过继承来建立，是静态的，在编译时刻便确定下来了。（工厂方法、适配器、模板方法、解释器）</li>
+<li>对象模式：用于处理对象之间的关系，这些关系可以通过组合或聚合来实现，在运行时刻是可以变化的，更具动态性。（除上面4种）</li>
+</ol>
 </li>
-<li><p>log_format：自定义一个名为main的日志格式</p>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">范围\目的</th>
+<th align="center">创建型模式</th>
+<th align="center">结构型模式</th>
+<th align="center">行为型模式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">类模式</td>
+<td align="center">工厂方法</td>
+<td align="center">（类）适配器</td>
+<td align="center">模板方式、解释器</td>
+</tr>
+<tr>
+<td align="center">对象模式</td>
+<td align="center">单例<br>原型<br>抽象工厂<br>建造者</td>
+<td align="center">代理<br>（对象）适配器<br>桥接<br>装饰<br>外观<br>享元<br>组合</td>
+<td align="center">策略<br>命令<br>职责链<br>状态<br>观察者<br>中介者<br>迭代器<br>访问者<br>备忘录</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>23种设计模式的功能<ol>
+<li>单例（Singleton）模式：某个类只能生成一个实例，该类提供了一个全局访问点供外部获取该实例，其拓展是有限多例模式。</li>
+<li>原型（Prototype）模式：将一个对象作为原型，通过对其进行复制而克隆出多个和原型类似的新实例。</li>
+<li>工厂方法（Factory Method）模式：定义一个用于创建产品的接口，由子类决定生产什么产品。</li>
+<li>抽象工厂（AbstractFactory）模式：提供一个创建产品族的接口，其每个子类可以生产一系列相关的产品。</li>
+<li>建造者（Builder）模式：将一个复杂对象分解成多个相对简单的部分，然后根据不同需要分别创建它们，最后构建成该复杂对象。</li>
+<li>代理（Proxy）模式：为某对象提供一种代理以控制对该对象的访问。即客户端通过代理间接地访问该对象，从而限制、增强或修改该对象的一些特性。</li>
+<li>适配器（Adapter）模式：将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。</li>
+<li>桥接（Bridge）模式：将抽象与实现分离，使它们可以独立变化。它是用组合关系代替继承关系来实现，从而降低了抽象和实现这两个可变维度的耦合度。</li>
+<li>装饰（Decorator）模式：动态的给对象增加一些职责，即增加其额外的功能。</li>
+<li>外观（Facade）模式：为多个复杂的子系统提供一个一致的接口，使这些子系统更加容易被访问。</li>
+<li>享元（Flyweight）模式：运用共享技术来有效地支持大量细粒度对象的复用。</li>
+<li>组合（Composite）模式：将对象组合成树状层次结构，使用户对单个对象和组合对象具有一致的访问性。</li>
+<li>模板方法（TemplateMethod）模式：定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤。</li>
+<li>策略（Strategy）模式：定义了一系列算法，并将每个算法封装起来，使它们可以相互替换，且算法的改变不会影响使用算法的客户。</li>
+<li>命令（Command）模式：将一个请求封装为一个对象，使发出请求的责任和执行请求的责任分割开。</li>
+<li>职责链（Chain of Responsibility）模式：把请求从链中的一个对象传到下一个对象，直到请求被响应为止。通过这种方式去除对象之间的耦合。</li>
+<li>状态（State）模式：允许一个对象在其内部状态发生改变时改变其行为能力。</li>
+<li>观察者（Observer）模式：多个对象间存在一对多关系，当一个对象发生改变时，把这种改变通知给其他多个对象，从而影响其他对象的行为。</li>
+<li>中介者（Mediator）模式：定义一个中介对象来简化原有对象之间的交互关系，降低系统中对象间的耦合度，使原有对象之间不必相互了解。</li>
+<li>迭代器（Iterator）模式：提供一种方法来顺序访问聚合对象中的一系列数据，而不暴露聚合对象的内部表示。</li>
+<li>访问者（Visitor）模式：在不改变集合元素的前提下，为一个集合中的每个元素提供多种访问方式，即每个元素有多个访问者对象访问。</li>
+<li>备忘录（Memento）模式：在不破坏封装性的前提下，获取并保存一个对象的内部状态，以便以后恢复它。</li>
+<li>解释器（Interpreter）模式：提供如何定义语言的文法，以及对语言句子的解释方法，即解释器。</li>
+</ol>
 </li>
-<li><p>access_log：自定义服务日志 路径+格式（可选）</p>
-</li>
-<li><p>sendfile：开启高效文件传输模式（zero copy 方式），避免内核缓冲区数据和用户缓冲区数据之间的拷贝。</p>
-</li>
-<li><p>keepalive_timeout：timeout 表示server端对连接的保持时间</p>
-</li>
-<li><p>gzip：打开gzip压缩</p>
-</li>
-<li><p>include /etc/nginx/conf.d/*.conf：将其他配置文件包含进来</p>
-</li>
-</ul>
-<h3 id="主要配置（放到上面-etc-nginx-conf-d-目录下）"><a href="#主要配置（放到上面-etc-nginx-conf-d-目录下）" class="headerlink" title="主要配置（放到上面/etc/nginx/conf.d/目录下）"></a>主要配置（放到上面/etc/nginx/conf.d/目录下）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">upstream myweb &#123;</span><br><span class="line">    server 192.168.3.125:8081 weight=3;</span><br><span class="line">    server 192.168.3.124:8081 weight=4;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  192.168.3.123;</span><br><span class="line"></span><br><span class="line">    location /zxj/ &#123;</span><br><span class="line">      alias       /opt/resource/myweb/;</span><br><span class="line">      add_header  Access-Control-Allow-Origin *;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">      proxy_pass  http://myweb;</span><br><span class="line">      index index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>upstream：设置负载均衡服务器，后端服务器地址及权重</li>
-<li>server：<ul>
-<li>listen：服务端口</li>
-<li>server_name：ip/域名，多个用逗号分开</li>
-<li>location：地址匹配设置，支持正则匹配，也支持条件匹配。从上到下优先匹配。<ul>
-<li>alias：别名。将/zxj/映射目录/opt/resource/myweb/</li>
-<li>add_header：允许跨域</li>
-<li>proxy_pass：反向代理</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>上面配置效果：<br>   -<a href="http://192.168.3.123:80/zxj/xxx" target="_blank" rel="noopener">http://192.168.3.123:80/zxj/xxx</a>  =&gt; 192.168.3.123该服务器下 /opt/resource/myweb/目录下xxx<br>   -<a href="http://192.168.3.123:80/ccc/xxx" target="_blank" rel="noopener">http://192.168.3.123:80/ccc/xxx</a>  =&gt; <a href="http://192.168.3.124:8081/ccc/xxx" target="_blank" rel="noopener">http://192.168.3.124:8081/ccc/xxx</a> 或 <a href="http://192.168.3.125:8081/ccc/xxx" target="_blank" rel="noopener">http://192.168.3.125:8081/ccc/xxx</a> （比例3:4，ccc处不能为zxj，会匹配到上一个）</p>
-<p>alias那里也可以用root，试了一些配置路径都没映射成功，马克一下。<br>小服务器，暂时不用考虑性能优化了。有时间再去研究研究~</p>
+</ol>
+<h3 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p><strong>软件实体应当对扩展开放、对修改关闭。</strong></p>
+<p>软件实体：</p>
+<ol>
+<li>项目中划分出的模块</li>
+<li>类与接口</li>
+<li>方法</li>
+</ol>
+<p><strong>开闭原则的含义是：当应用的需求改变时，在不修改软件实体的源代码或者二进制代码的前提下，可以扩展模块的功能，使其满足新的需求。</strong></p>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><p>开闭原则是面向对象程序设计的终极目标，它使软件实体拥有一定的适应性和灵活性的同时具备稳定性和延续性。具体来说，其作用如下。</p>
+<ol>
+<li>对软件测试的影响<br>软件遵守开闭原则的话，软件测试时只需要对扩展的代码进行测试就可以了，因为原有的测试代码仍然能够正常运行。</li>
+<li>可以提高代码的可复用性<br>粒度越小，被复用的可能性就越大；在面向对象的程序设计中，根据原子和抽象编程可以提高代码的可复用性。</li>
+<li>可以提高软件的可维护性<br>遵守开闭原则的软件，其稳定性高和延续性强，从而易于扩展和维护。</li>
+</ol>
+<h3 id="里式替换原则"><a href="#里式替换原则" class="headerlink" title="里式替换原则"></a>里式替换原则</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p><strong>继承必须确保超类所拥有的性质在子类中仍然成立</strong></p>
+<h4 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h4><ol>
+<li>里氏替换原则是实现开闭原则的重要方式之一。</li>
+<li>它克服了继承中重写父类造成的可复用性变差的缺点。</li>
+<li>它是动作正确性的保证。即类的扩展不会给已有的系统引入新的错误，降低了代码出错的可能性。</li>
+</ol>
+<h4 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h4><p><strong>里氏替换原则通俗来讲就是：子类可以扩展父类的功能，但不能改变父类原有的功能。</strong>也就是说：子类继承父类时，除添加新的方法完成新增功能外，尽量不要重写父类的方法。</p>
+<h3 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h3><h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h4><p>高层模块不应该依赖低层模块，两者都应该依赖其抽象；抽象不应该依赖细节，细节应该依赖抽象。其核心思想是：<strong>要面向接口编程，不要面向实现编程。</strong><br><strong>依赖倒置原则是实现开闭原则的重要途径之一，它降低了客户与实现模块之间的耦合。</strong><br>由于在软件设计中，细节具有多变性，而抽象层则相对稳定，因此以抽象为基础搭建起来的架构要比以细节为基础搭建起来的架构要稳定得多。这里的抽象指的是接口或者抽象类，而细节是指具体的实现类。<br>使用接口或者抽象类的目的是制定好规范和契约，而不去涉及任何具体的操作，把展现细节的任务交给它们的实现类去完成。</p>
+<h4 id="作用-2"><a href="#作用-2" class="headerlink" title="作用"></a>作用</h4><p><strong>依赖倒置原则的目的是通过要面向接口的编程来降低类间的耦合性</strong>，所以我们在实际编程中只要遵循以下4点，就能在项目中满足这个规则。</p>
+<ol>
+<li>每个类尽量提供接口或抽象类，或者两者都具备。</li>
+<li>变量的声明类型尽量是接口或者是抽象类。</li>
+<li>任何类都不应该从具体类派生。</li>
+<li>使用继承时尽量遵循里氏替换原则。</li>
+</ol>
+<h3 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h3><h4 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h4><p><strong>规定一个类应该有且仅有一个引起它变化的原因，否则类应该被拆分</strong><br>该原则提出对象不应该承担太多职责，如果一个对象承担了太多的职责，至少存在以下两个缺点：</p>
+<ol>
+<li>一个职责的变化可能会削弱或者抑制这个类实现其他职责的能力；</li>
+<li>当客户端需要该对象的某一个职责时，不得不将其他不需要的职责全都包含进来，从而造成冗余代码或代码的浪费。</li>
+</ol>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>单一职责原则的核心就是控制类的粒度大小、将对象解耦、提高其内聚性。如果遵循单一职责原则将有以下优点。</p>
+<ol>
+<li>降低类的复杂度。一个类只负责一项职责，其逻辑肯定要比负责多项职责简单得多。</li>
+<li>提高类的可读性。复杂性降低，自然其可读性会提高。</li>
+<li>提高系统的可维护性。可读性提高，那自然更容易维护了。</li>
+<li>变更引起的风险降低。变更是必然的，如果单一职责原则遵守得好，当修改一个功能时，可以显著降低对其他功能的影响。</li>
+</ol>
+<h4 id="实现方法-1"><a href="#实现方法-1" class="headerlink" title="实现方法"></a>实现方法</h4><p>单一职责原则是最简单但又最难运用的原则，需要设计人员发现类的不同职责并将其分离，再封装到不同的类或模块中。而发现类的多重职责需要设计人员具有较强的分析设计能力和相关重构经验。下面以大学学生工作管理程序为例介绍单一职责原则的应用。</p>
+<h3 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h3><h4 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h4><p><strong>客户端不应该被迫依赖于它不使用的方法</strong><br><strong>一个类对另一个类的依赖应该建立在最小的接口上</strong></p>
+<p>接口隔离原则和单一职责都是为了提高类的内聚性、降低它们之间的耦合性，体现了封装的思想，但两者是不同的：</p>
+<ol>
+<li>单一职责原则注重的是职责，而接口隔离原则注重的是对接口依赖的隔离。</li>
+<li>单一职责原则主要是约束类，它针对的是程序中的实现和细节；接口隔离原则主要约束接口，主要针对抽象和程序整体框架的构建。</li>
+</ol>
+<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><p>接口隔离原则是为了约束接口、降低类对接口的依赖性，遵循接口隔离原则有以下 5 个优点。</p>
+<ol>
+<li>将臃肿庞大的接口分解为多个粒度小的接口，可以预防外来变更的扩散，提高系统的灵活性和可维护性。</li>
+<li>接口隔离提高了系统的内聚性，减少了对外交互，降低了系统的耦合性。</li>
+<li>如果接口的粒度大小定义合理，能够保证系统的稳定性；但是，如果定义过小，则会造成接口数量过多，使设计复杂化；如果定义太大，灵活性降低，无法提供定制服务，给整体项目带来无法预料的风险。</li>
+<li>使用多个专门的接口还能够体现对象的层次，因为可以通过接口的继承，实现对总接口的定义。</li>
+<li>能减少项目工程中的代码冗余。过大的大接口里面通常放置许多不用的方法，当实现这个接口的时候，被迫设计冗余的代码。</li>
+</ol>
+<h4 id="实现方法-2"><a href="#实现方法-2" class="headerlink" title="实现方法"></a>实现方法</h4><p>在具体应用接口隔离原则时，应该根据以下几个规则来衡量。</p>
+<ol>
+<li>接口尽量小，但是要有限度。一个接口只服务于一个子模块或业务逻辑。</li>
+<li>为依赖接口的类定制服务。只提供调用者需要的方法，屏蔽不需要的方法。</li>
+<li>了解环境，拒绝盲从。每个项目或产品都有选定的环境因素，环境不同，接口拆分的标准就不同深入了解业务逻辑。</li>
+<li>提高内聚，减少对外交互。使接口用最少的方法去完成最多的事情。</li>
+</ol>
+<h3 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h3><h4 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h4><p><strong>只与你的直接朋友交谈，不跟“陌生人”说话。其含义是：如果两个软件实体无须直接通信，那么就不应当发生直接的相互调用，可以通过第三方转发该调用。其目的是降低类之间的耦合度，提高模块的相对独立性。</strong><br>迪米特法则中的“朋友”是指：当前对象本身、当前对象的成员对象、当前对象所创建的对象、当前对象的方法参数等，这些对象同当前对象存在关联、聚合或组合关系，可以直接访问这些对象的方法。</p>
+<h4 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h4><p>迪米特法则要求限制软件实体之间通信的宽度和深度，正确使用迪米特法则将有以下两个优点。</p>
+<ol>
+<li>降低了类之间的耦合度，提高了模块的相对独立性。</li>
+<li>由于亲合度降低，从而提高了类的可复用率和系统的扩展性。</li>
+</ol>
+<p>但是，过度使用迪米特法则会使系统产生大量的中介类，从而增加系统的复杂性，使模块之间的通信效率降低。所以，在釆用迪米特法则时需要反复权衡，确保高内聚和低耦合的同时，保证系统的结构清晰。</p>
+<h4 id="实现方法-3"><a href="#实现方法-3" class="headerlink" title="实现方法"></a>实现方法</h4><p>从迪米特法则的定义和特点可知，它强调以下两点：</p>
+<ol>
+<li>从依赖者的角度来说，只依赖应该依赖的对象。</li>
+<li>从被依赖者的角度说，只暴露应该暴露的方法。</li>
+</ol>
+<p>所以，在运用迪米特法则时要注意以下 6 点。</p>
+<ol>
+<li>在类的划分上，应该创建弱耦合的类。类与类之间的耦合越弱，就越有利于实现可复用的目标。</li>
+<li>在类的结构设计上，尽量降低类成员的访问权限。</li>
+<li>在类的设计上，优先考虑将一个类设置成不变类。</li>
+<li>在对其他类的引用上，将引用其他对象的次数降到最低。</li>
+<li>不暴露类的属性成员，而应该提供相应的访问器（set 和 get 方法）。</li>
+<li>谨慎使用序列化（Serializable）功能。</li>
+</ol>
+<h3 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h3><h4 id="定义-6"><a href="#定义-6" class="headerlink" title="定义"></a>定义</h4><p>合成复用原则又叫组合/聚合复用原则。它要求在软件复用时，要尽量先使用组合或者聚合等关联关系来实现，其次才考虑使用继承关系来实现。<strong>如果要使用继承关系，则必须严格遵循里氏替换原则。</strong><br>合成复用原则同里氏替换原则相辅相成的，两者都是开闭原则的具体实现规范。</p>
+<h4 id="重要性"><a href="#重要性" class="headerlink" title="重要性"></a>重要性</h4><p>通常类的复用分为继承复用和合成复用两种，继承复用虽然有简单和易实现的优点，但它也存在以下缺点。</p>
+<ol>
+<li>继承复用破坏了类的封装性。因为继承会将父类的实现细节暴露给子类，父类对子类是透明的，所以这种复用又称为“白箱”复用。</li>
+<li>子类与父类的耦合度高。父类的实现的任何改变都会导致子类的实现发生变化，这不利于类的扩展与维护。</li>
+<li>它限制了复用的灵活性。从父类继承而来的实现是静态的，在编译时已经定义，所以在运行时不可能发生变化。</li>
+</ol>
+<p>采用组合或聚合复用时，可以将已有对象纳入新对象中，使之成为新对象的一部分，新对象可以调用已有对象的功能，它有以下优点。</p>
+<ol>
+<li>它维持了类的封装性。因为成分对象的内部细节是新对象看不见的，所以这种复用又称为“黑箱”复用。</li>
+<li>新旧类之间的耦合度低。这种复用所需的依赖较少，新对象存取成分对象的唯一方法是通过成分对象的接口。</li>
+<li>复用的灵活性高。这种复用可以在运行时动态进行，新对象可以动态地引用与成分对象类型相同的对象。</li>
+</ol>
+<h4 id="实现方法-4"><a href="#实现方法-4" class="headerlink" title="实现方法"></a>实现方法</h4><p>合成复用原则是通过将已有的对象纳入新对象中，作为新对象的成员对象来实现的，新对象可以调用已有对象的功能，从而达到复用。</p>
+<h3 id="七种设计原则总结。"><a href="#七种设计原则总结。" class="headerlink" title="七种设计原则总结。"></a>七种设计原则总结。</h3><p><strong>开闭原则是总纲，它告诉我们要对扩展开放，对修改关闭；</strong><br><strong>里氏替换原则告诉我们不要破坏继承体系；</strong><br><strong>依赖倒置原则告诉我们要面向接口编程；</strong><br><strong>单一职责原则告诉我们实现类要职责单一；</strong><br><strong>接口隔离原则告诉我们在设计接口的时候要精简单一；</strong><br><strong>迪米特法则告诉我们要降低耦合度；</strong><br><strong>合成复用原则告诉我们要优先使用组合或者聚合关系复用，少用继承关系复用。</strong></p>
 
       
     </div>
@@ -597,9 +702,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
-          
-            <a href="/tags/proxy/" rel="tag"># proxy</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -612,8 +715,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/21/nginx-proxy/" rel="next" title="正向代理和反向代理的区别">
-                <i class="fa fa-chevron-left"></i> 正向代理和反向代理的区别
+              <a href="/2019/07/03/git-cmd/" rel="next" title="git常用命令">
+                <i class="fa fa-chevron-left"></i> git常用命令
               </a>
             
           </div>
@@ -621,10 +724,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/29/docker-nginx/" rel="prev" title="docker部署nginx">
-                docker部署nginx <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -852,7 +951,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx配置文件结构"><span class="nav-number">1.</span> <span class="nav-text">nginx配置文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局块（main）"><span class="nav-number">1.1.</span> <span class="nav-text">全局块（main）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#events块"><span class="nav-number">1.2.</span> <span class="nav-text">events块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http块"><span class="nav-number">1.3.</span> <span class="nav-text">http块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#server块"><span class="nav-number">1.4.</span> <span class="nav-text">server块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#location块"><span class="nav-number">1.5.</span> <span class="nav-text">location块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的配置（基本都是默认配置）"><span class="nav-number">2.</span> <span class="nav-text">简单的配置（基本都是默认配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要配置（放到上面-etc-nginx-conf-d-目录下）"><span class="nav-number">3.</span> <span class="nav-text">主要配置（放到上面/etc/nginx/conf.d/目录下）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件设计模式的概念和意义"><span class="nav-number">1.</span> <span class="nav-text">软件设计模式的概念和意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件设计模式的基本要素"><span class="nav-number">2.</span> <span class="nav-text">软件设计模式的基本要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类和功能"><span class="nav-number">3.</span> <span class="nav-text">分类和功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开闭原则"><span class="nav-number">4.</span> <span class="nav-text">开闭原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用"><span class="nav-number">4.2.</span> <span class="nav-text">作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#里式替换原则"><span class="nav-number">5.</span> <span class="nav-text">里式替换原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-1"><span class="nav-number">5.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用-1"><span class="nav-number">5.2.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现方法"><span class="nav-number">5.3.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖倒置原则"><span class="nav-number">6.</span> <span class="nav-text">依赖倒置原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-2"><span class="nav-number">6.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用-2"><span class="nav-number">6.2.</span> <span class="nav-text">作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单一职责原则"><span class="nav-number">7.</span> <span class="nav-text">单一职责原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-3"><span class="nav-number">7.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">7.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现方法-1"><span class="nav-number">7.3.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口隔离原则"><span class="nav-number">8.</span> <span class="nav-text">接口隔离原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-4"><span class="nav-number">8.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点-1"><span class="nav-number">8.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现方法-2"><span class="nav-number">8.3.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迪米特法则"><span class="nav-number">9.</span> <span class="nav-text">迪米特法则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-5"><span class="nav-number">9.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点-2"><span class="nav-number">9.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现方法-3"><span class="nav-number">9.3.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合成复用原则"><span class="nav-number">10.</span> <span class="nav-text">合成复用原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-6"><span class="nav-number">10.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重要性"><span class="nav-number">10.2.</span> <span class="nav-text">重要性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现方法-4"><span class="nav-number">10.3.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七种设计原则总结。"><span class="nav-number">11.</span> <span class="nav-text">七种设计原则总结。</span></a></li></ol></div>
             
 
           </div>
