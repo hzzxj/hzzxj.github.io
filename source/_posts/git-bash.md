@@ -269,11 +269,28 @@ $ git branch -d [branch]
 ![](/images/git/23.png)
 
 ### 删除远程分支
-```
+```bash
 $ git push origin --delete [remote branch]
 ```
 删除远程仓库上的develop分支
 ![](/images/git/24.png)
+
+### 新建远程分支
+```bash
+# 本地分支与远程分支名称相同
+$ git push --set-upstream origin [branch]
+
+# 本地分支与远程分支名称不同
+$ git push --set-upstream origin [branch]:[remote branch]
+```
+![](/images/git/24_1.png)
+
+### 查看分支信息
+查看git项目是从git的哪个分支上拉下来
+```
+$ git remote show origin
+```
+![](/images/git/24_2.png)
 
 ### 合并分支
 ```bash
