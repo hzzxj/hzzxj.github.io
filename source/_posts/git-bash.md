@@ -443,3 +443,29 @@ $ git push [remote] :refs/tags/[tag]
 ![](/images/git/39.png)
 
 ## 冲突
+
+### 合并分支冲突
+
+新建一个feat分支，修改文件并提交
+![](/images/git/40.png)
+
+切换到master分支，同样同一个文件同一行并提交
+![](/images/git/41.png)
+
+合并分支时，发现合并冲突了
+![](/images/git/42.png)
+
+冲突文件：
+![](/images/git/43.png)
+
+Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容，修改后重新提交。
+```bash
+# 查看分支合并情况
+$ git log --graph --pretty=oneline --abbrev-commit
+```
+![](/images/git/44.png)
+
+### 本地仓库与远程仓库冲突
+
+如果多人合作，其他人推送了他的提交，刚好你对同一文件做了修改，推送的时候就会有问题。
+这时候先用git pull把最新的提交抓下来，在本地合并，解决冲突后再推送。
