@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[docker部署vsftpd]]></title>
+    <url>%2F2020%2F12%2F16%2Fdocker-vsftpd%2F</url>
+    <content type="text"><![CDATA[官方文档链接https://hub.docker.com/r/fauria/vsftpd docker官方镜像(镜像名:版本号，默认latest)1$ docker pull fauria/vsftpd 查看镜像列表1$ docker images 启动容器123456$ docker run -idt -v /var/ftp:/home/vsftpd \ -p 20:20 -p 21:21 -p 21100-21110:21100-21110 \ -e FTP_USER=test -e FTP_PASS=test \ -e PASV_ADDRESS=192.168.3.37 \ -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110 \ --name vsftpd --restart=always fauria/vsftpd -v：把容器内/home/vsftpd挂载到主机/var/ftp目录。这里放到var这个公共目录下，其他部分目录可能会导致客户端连不上（需要设置用户权限）-e FTP_USER=test：设置用户名test-e FTP_PASS=test：设置密码test-e PASV_ADDRESS=192.168.3.37：开启ftp被动模式，值为主机ip-e PASV_MIN_PORT：客户端下载随机端口号下限，与前面docker端口映射一致-e PASV_MAX_PORT：客户端下载随机端口号上限，与前面docker端口映射一致–restart=always：docker重启时重启容器 测试]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>vsftpd</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[win10安装mysql]]></title>
+    <url>%2F2019%2F10%2F22%2Fmysql-install%2F</url>
+    <content type="text"><![CDATA[下载官网下载地址https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.28-winx64.zip 解压解压到自定义目录，不建议放在C盘。这里我解压到E:\mysql-5.7.28-winx64 创建配置文件解压后发现目录下没有默认的配置文件，这里手动创建一个my.ini的配置文件 12345678910[mysqld]port=3306basedir=E:\mysql-5.7.28-winx64datadir=E:\mysql-5.7.28-winx64\datamax_connections=200character-set-server=utf8default-storage-engine=INNODBsql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES[mysql]default-character-set=utf8 basedir：解压mysql的根目录datadir：数据存放目录，这个目录不用手动创建，在安装时会自动创建 设置环境变量新建一个MYSQL_HOME的环境变量，并添加到path里 安装管理员权限运行cmd因为设置了环境变量，所以可以在任意目录使用mysqld命令。 12345678# 这里会初始化上面的data文件夹，时间有点久mysqld --initialize# 安装mysqld -install# 启动服务net start mysql 修改初始密码在data目录下找到XXX.err文件并打开，找到初始化的随机密码password 使用密码进入mysql 修改密码 创建用户、分配权限12345# 新建用户create user 'username'@'host' identified by 'password'; # host="localhost"为本地用户 host="ip"为ip登录 host="%"为外网登录# 查看用户select host,user,authentication_string from mysql.user; 这里创建了一个用户名为test，密码为123456，允许外网登录的用户 123456789# 分配权限grant privileges on databasename.tablename to 'username'@'host' identified by 'password';# priveleges(权限列表),可以是all priveleges, 表示所有权限，也可以是select、update等权限，多个权限的名词,相互之间用逗号分开。# on用来指定权限针对哪些库和表。# *.* 中前面的*号用来指定数据库名，后面的*号用来指定表名。# to 表示将权限赋予某个用户, 如 jack@'localhost' 表示jack用户，@后面接限制的主机，可以是IP、IP段、域名以及%，%表示任何地方。# identified by指定用户的登录密码,该项可以省略。# WITH GRANT OPTION 这个选项表示该用户可以将自己拥有的权限授权给别人。注意：经常有人在创建操作用户的时候不指定WITH GRANT OPTION选项导致后来该用户不能使用GRANT命令创建用户或者给其它用户授权。# 可以使用GRANT重复给用户添加权限，权限叠加，比如你先给用户添加一个select权限，然后又给用户添加一个insert权限，那么该用户就同时拥有了select和insert权限。]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[postgresql发生锁表]]></title>
+    <url>%2F2019%2F09%2F30%2Fpostgresql-locktable%2F</url>
+    <content type="text"><![CDATA[查询相关表当前的活动进程：1SELECT * FROM pg_stat_activity where query ~ 'table_name'; 解锁1SELECT pg_terminate_backend(pid) FROM pg_stat_activity where query ~ 'table_name' and pid &lt;&gt; pg_backend_pid();]]></content>
+      <categories>
+        <category>postgresql</category>
+      </categories>
+      <tags>
+        <tag>postgresql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[docker部署mysql]]></title>
+    <url>%2F2019%2F08%2F08%2Fdocker-mysql%2F</url>
+    <content type="text"><![CDATA[官方文档链接https://hub.docker.com/_/mysql docker官方镜像(镜像名:版本号，默认latest)12# 这里用5.7版本$ docker pull mysql:5.7 简单启动mysql容器1$ docker run -id --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7 -e： 添加环境变量。 MYSQL_ROOT_PASSWORD 这里添加root用户的密码。其他环境变量可以看官方的文档。如果使用已包含数据库的数据目录启动容器，则任何变量都不会产生任何影响。 使用自定义配置文件启动1$ docker run -id --name mysql -p 3306:3306 -v /opt/mysql:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7 -v /opt/mysql:/etc/mysql/conf.d：将宿主机的/opt/mysql目录挂载到容器内/etc/mysql/conf.d。自定义的配置文件放到/opt/mysql目录下就行了。 传入配置参数启动不想挂载配置文件，又想修改mysql的配置参数。 1$ docker run -id --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci –character-set-server=utf8mb4：设置数据库字符集编码为utf8mb4（utf8的超集并完全兼容utf8）–collation-server=utf8mb4_unicode_ci：设置排序字符集为utf8mb4_unicode_ci 查看可用选项的完整列表 1$ docker run -it --rm mysql:tag --verbose --help 挂载数据目录1$ docker run -id --name mysql -p 3306:3306 -v /opt/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7 -v /opt/mysql/data:/var/lib/mysql：将宿主机的/opt/mysql/data目录挂载到容器内/var/lib/mysql。 这样mysql的数据文件就保存在宿主机的/opt/mysql/data目录。]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git常用命令实践]]></title>
+    <url>%2F2019%2F07%2F19%2Fgit-bash%2F</url>
+    <content type="text"><![CDATA[关系图 Workspace：工作区 Index/Stage：暂存区 Repository：本地仓库 Remote：远程仓库 本地仓库新建仓库12345# 在当前目录新建一个Git仓库$ git init# 新建一个目录，将其初始化成Git仓库$ git init [project-name] 配置信息1234567891011121314151617# 显示配置列表$ git config --list# 设置用户信息# 当前仓库设置用户名$ git config --global user.name "Zhaoxinjie"# 当前仓库设置用户邮箱$ git config --global user.email "543008186@qq.com"# 全局设置用户名$ git config --global user.name "Zhaoxinjie"# 全局设置用户邮箱$ git config --global user.email "543008186@qq.com"# 不设置值即为查看 显示工作区和暂存区的状态1$ git status 添加文件到暂存区12345678# 添加指定文件到暂存区$ git add [file1] [file2] ...# 添加指定目录到暂存区$ git add [div]# 添加当前目录所有文件到暂存区$ git add . 这里可以看到新添加了一个文件 提交到本地仓库123456789101112131415# 提交暂存区到仓库区，message是每次提交的说明，查看历史记录的时候会显示$ git commit -m [message]# 提交暂存区指定文件到仓库区$ git commit [file1] [file2] -m [message]# 提交工作区自上次commit之后的变化，直接到仓库区$ git commit -a# 提交时显示所有diff信息$ git commit -v# 使用一次新的commit，替代上一次提交# 如果代码没有变化，则用来修改上一次commit的提交信息$ git commit --amend -m [message] 可以看到在这次提交中，一个文件变动，增加了1行 新增加一个test1.txt，并修改test.txt。然后用–amend替代上一次提交。 查看文件提交纪录12345# 显示当前分支的历史版本$ git log# 显示commit历史，单行显示（--pretty=oneline）,以及每次commit发生变更的文件（--stat）$ git log --stat --pretty=oneline查看某文件暂存区和工作区的差异 查看文件变动1234567891011121314# 查看某文件暂存区和工作区的差异$ git diff [file]# 查看暂存区和工作区的差异$ git diff# 查看某文件暂存区和本地仓库的差异$ git diff --cached [file]# 查看暂存区和本地仓库的差异$ git diff --cached# 显示工作区与当前分支最新commit之间的差异$ git diff HEAD 这里可以看到test.txt删除了第2行，添加了234567行 把test.txt添加到暂存区，查看修改 撤销工作区的修改12# 恢复暂存区的指定文件到工作区，譬如在工作区修改了test.txt，还没有add，但是现在突然不要这修改了，可以用这个方式撤销$ git checkout [file] 撤销暂存区的修改12# 将add的文件撤销到工作区$ git reset HEAD 可以看到执行git reset HEAD，之前git add的文件重新回到了工作区 版本回退12345678# commitId为每次commit的token，可以用git log查看。commitId为空或者为HEAD，为当前版本，即上一次commit的状态$ git reset --hard [commintId]# 一个^代表回退一个版本$ git reset --hard^# ~后跟的数字代表回退几个版本$ git reset --hard~1 查看当前分支的提交纪录1$ git reflog 远程仓库从远程仓库克隆12# 从远程仓库克隆$ git clone https://gitee.com/zzdzxj/test1.git 本地仓库与远程仓库连接12345# 如果已经有本地仓库，想要和远程仓库连接$ git remote add origin https://gitee.com/zzdzxj/test1.git# 与本地仓库连接之后，需要把本地修改先推送到远程仓库上$ git push -u origin master gitee上新建一个仓库的例子 使用fetch从远程仓库拉取代码/查看更新12345678# 从远程仓库拉取代码，不合并。可用来查看有没有其他人更新$ git fetch origin master# 比较本地的master分支与origin的master分支的区别$ git log -p master ..origin/master# 进行合并$ git merge origin/master 使用pull从远程仓库拉取代码12# 从远程仓库拉取代码并合并。如果要拉取的分支与当前分支连接，参数可省略$ git pull [remote] [branch] 推送代码到远程仓库123# 推送代码到远程仓库。如果要拉取的分支与当前分支连接，参数可省略# 第一次推送可能要登录$ git push [remote] [branch] 分支管理查看分支12345678# 查看本地分支$ git branch# 查看远程分支$ git branch -r# 查看本地分支和远程分支$ git branch -a 新建分支12345# 新建分支$ git branch [branch-name]# 新建分支，并切换到该分支$ git checkout -b [branch-name] git checkout -b [branch-name]等价于git branch [branch-name]git checkout [branch-name] 从远程仓库拉取分支12# clone下来的新仓库，只有默认分支的代码，如果需要拉取其他分支$ git checkout -b [branch-name] [remote]/[branch] 以程仓库的develop为模板，在本地建立一个dev的分支，并切换到dev分支。 本地分支与远程分支建立追踪关系1$ git branch --set-upstream-to=origin/[remote branch] [branch] 将本地分支dev与远程分支develop建立连接 切换分支12345# 切换到指定分支，并更新工作区$ git checkout [branch]# 切换到上一个分支$ git checkout - 删除分支1$ git branch -d [branch] 删除远程分支1$ git push origin --delete [remote branch] 删除远程仓库上的develop分支 新建远程分支12345# 本地分支与远程分支名称相同$ git push --set-upstream origin [branch]# 本地分支与远程分支名称不同$ git push --set-upstream origin [branch]:[remote branch] 查看分支信息查看git项目是从git的哪个分支上拉下来 1$ git remote show origin 合并分支12# 合并指定分支到当前分支$ git merge [branch] 储藏git stash命令的作用就是将目前还不想提交的但是已经修改的内容进行保存至堆栈中，后续可以在某个分支上恢复出堆栈中的内容。这也就是说，stash中的内容不仅仅可以恢复到原先开发的分支，也可以恢复到其他任意指定的分支上。git stash作用的范围包括工作区和暂存区中的内容，也就是说没有提交的内容都会保存至堆栈中。 应用场景 当正在dev分支上开发某个项目，这时项目中出现一个bug，需要紧急修复，但是正在开发的内容只是完成一半，还不想提交，这时可以用git stash命令将修改的内容保存至堆栈区，然后顺利切换到hotfix分支进行bug修复，修复完成后，再次切回到dev分支，从堆栈中恢复刚刚保存的内容。 由于疏忽，本应该在dev分支开发的内容，却在master上进行了开发，需要重新切回到dev分支上进行开发，可以用git stash将内容保存至堆栈中，切回到dev分支后，再次恢复内容即可。 git stash能够将所有未提交的修改（工作区和暂存区）保存至堆栈中，用于后续恢复当前工作目录。 1$ git stash git stash save等同于git stash，只是多了注释 1$ git stash save [message] git stash list查看当前stash中的内容 1$ git stash list 可以看到之前保存的2个 git stash pop将当前stash中的内容弹出，并应用到当前分支对应的工作目录上。注：该命令将堆栈中最近保存的内容删除（栈是先进后出） 1$ git stash pop git stash apply将堆栈中的内容应用到当前目录，不同于git stash pop，该命令不会将内容从堆栈中删除，也就说该命令能够将堆栈的内容多次应用到工作目录中，适应于多个分支的情况。也可以使用git stash apply + stash名字（如stash@{1}）指定恢复哪个stash到当前的工作目录。 1$ git stash apply git stash drop从堆栈中移除某个指定的stash，不指定删除stash@{0} 1$ git stash drop [stash-name] git stash clean清除堆栈中的所有内容 1$ git stash clear git stash show查看堆栈中最新保存的stash和当前目录的差异。 12345678910$ git stash show# 查看指定的stash和当前目录差异。 $ git stash show stash@&#123;1&#125;# 查看详细的不同$ git stash show -p# 查看指定的stash的差异内容$ git stash show stash@&#123;1&#125; -p git stash branch从最新的stash创建分支，与pop一样，会删除stash。 12345# 根据最近的stash创建$ git stash branch [branch-name]# 根据指定的stash创建$ git stash branch [branch-name] stash@&#123;1&#125; 应用场景：当储藏了部分工作，暂时不去理会，继续在当前分支进行开发，后续想将stash中的内容恢复到当前工作目录时，如果是针对同一个文件的修改（即便不是同行数据），那么可能会发生冲突，恢复失败，这里通过创建新的分支来解决。可以用于解决stash中的内容和当前目录的内容发生冲突的情景。发生冲突时，需手动解决冲突。 标签列出所有标签1$ git tag 新建标签12345# 在当前commit新建一个tag$ git tag [tag]# 在指定commit新建一个tag$ git tag [tag] [commit] 查看标签1$ git show [tag] 删除本地标签1$ git tag -d [tag] 推送标签12345# 推送指定标签到远程仓库$ git push [remote] [tag]# 推送所有标签到远程仓库$ git push [remote] --tags 查看远程标签1$ git ls-remote –-tags [remote] 删除远程标签12345# 先删除本地标签$ git tag -d [tag]# 推送到远程仓库$ git push [remote] :refs/tags/[tag] 冲突合并分支冲突新建一个feat分支，修改文件并提交 切换到master分支，同样同一个文件同一行并提交 合并分支时，发现合并冲突了 冲突文件： Git用&lt;&lt;&lt;&lt;&lt;&lt;&lt;，=======，&gt;&gt;&gt;&gt;&gt;&gt;&gt;标记出不同分支的内容，修改后重新提交。 12# 查看分支合并情况$ git log --graph --pretty=oneline --abbrev-commit 本地仓库与远程仓库冲突如果多人合作，其他人推送了他的提交，刚好你对同一文件做了修改，推送的时候就会有问题。这时候先用git pull把最新的提交抓下来，在本地合并，解决冲突后再推送。]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[设计模式]]></title>
+    <url>%2F2019%2F07%2F10%2Fdesign-pattern%2F</url>
+    <content type="text"><![CDATA[软件设计模式的概念和意义 软件设计模式的概念软件设计模式（Software Design Pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。它描述了在软件设计过程中的一些不断发生的问题，以及该问题的解决方案。也就是说，它是解决特定问题的一系列套路，是前辈们的代码设计经验的总结，具有一定的普遍性，可以反复使用。其目的是为了提高代码的可重用性、代码的可读性和代码的可靠性。 学习设计模式的意义设计模式的本质是面向对象设计原则的实际运用、是对类的封装性、继承性和多态性以及类的关联关系和组合关系的充分理解。正确使用设计模式具有以下优点： 可以提高程序员的思维能力、编程能力和设计能力。 使程序设计更加标准化、代码编制更加工程化，使软件开发效率大大提高，从而缩短软件的开发周期。 使设计的代码的可重用性高、可读性强、可靠性高、灵活性好、可维护性强。当然，软件设计模式只是一个引导。在具体的软件幵发中，必须根据设计的应用系统的特点和要求来恰当选择。对于简单的程序开发，苛能写一个简单的算法要比引入某种设计模式更加容易。但对大项目的开发或者框架设计，用设计模式来组织代码显然更好。 软件设计模式的基本要素软件设计模式使人们可以更加简单方便地复用成功的设计和体系结构，它通常包含以下几个基本要素：模式名称、别名、动机、问题、解决方案、效果、结构、模式角色、合作关系、实现方法、适用性、已知应用、例程、模式扩展和相关模式等，其中最关键的元素包括以下4个主要部分。 模式名称每一个模式都有自己的名称，通常用一两个词来描述，可以根据模式的问题、特点、解决方案、功能和效果来命名。模式名称（PatternName）有助于我们理解和记忆该模式，也方便我们来讨论自己的设计。 问题问题（Problem）描述了该模式的应用环境，即何时使用该模式。它解释了设计问题和问题存在的前因后果，以及必须满足的一系列先决条件。 解决方案模式问题的解决方案（Solution）包括设计的组成部分、它们之间的相互关系及各自的职责和协作方式。因为模式就像一个模板，可应用于多种不同场合，所以解决方案并不描述一个特定而具体的设计或实现，而是提供实际问题的抽象描述和怎样用一个具有一般意义的元素组合（类或对象的组合）来解决这个问题。 效果描述了模式的应用效果以及使用该模式应该权衡的问题，即模式的优缺点。主要是对时间和空间的衡量，以及该模式对系统的灵活性、扩充性、可移植性的影响，也考虑其实现问题。显式地列出这些效果（Consequence）对理解和评价这些模式有很大的帮助。 分类和功能设计模式有两种分类方法，即根据模式的目的来分和根据模式的作用的范围来分。 根据目的来分 创建型模式：用于描述“怎样创建对象”，它的主要特点是“将对象的创建与使用分离”。（单例、原型、工厂方法、抽象工厂、建造者） 结构型模式：用于描述如何将类或对象按某种布局组成更大的结构。（代理、适配器、桥接、装饰、外观、享元、组合）。 行为型模式：用于描述类或对象之间怎样相互协作共同完成单个对象都无法单独完成的任务，以及怎样分配职责。（模板方法、策略、命令、职责链、状态、观察者、中介者、迭代器、访问者、备忘录、解释器） 根据作用范围来分 类模式：用于处理类与子类之间的关系，这些关系通过继承来建立，是静态的，在编译时刻便确定下来了。（工厂方法、适配器、模板方法、解释器） 对象模式：用于处理对象之间的关系，这些关系可以通过组合或聚合来实现，在运行时刻是可以变化的，更具动态性。（除上面4种） 范围\目的 创建型模式 结构型模式 行为型模式 类模式 工厂方法 （类）适配器 模板方式、解释器 对象模式 单例原型抽象工厂建造者 代理（对象）适配器桥接装饰外观享元组合 策略命令职责链状态观察者中介者迭代器访问者备忘录 23种设计模式的功能 单例（Singleton）模式：某个类只能生成一个实例，该类提供了一个全局访问点供外部获取该实例，其拓展是有限多例模式。 原型（Prototype）模式：将一个对象作为原型，通过对其进行复制而克隆出多个和原型类似的新实例。 工厂方法（Factory Method）模式：定义一个用于创建产品的接口，由子类决定生产什么产品。 抽象工厂（AbstractFactory）模式：提供一个创建产品族的接口，其每个子类可以生产一系列相关的产品。 建造者（Builder）模式：将一个复杂对象分解成多个相对简单的部分，然后根据不同需要分别创建它们，最后构建成该复杂对象。 代理（Proxy）模式：为某对象提供一种代理以控制对该对象的访问。即客户端通过代理间接地访问该对象，从而限制、增强或修改该对象的一些特性。 适配器（Adapter）模式：将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。 桥接（Bridge）模式：将抽象与实现分离，使它们可以独立变化。它是用组合关系代替继承关系来实现，从而降低了抽象和实现这两个可变维度的耦合度。 装饰（Decorator）模式：动态的给对象增加一些职责，即增加其额外的功能。 外观（Facade）模式：为多个复杂的子系统提供一个一致的接口，使这些子系统更加容易被访问。 享元（Flyweight）模式：运用共享技术来有效地支持大量细粒度对象的复用。 组合（Composite）模式：将对象组合成树状层次结构，使用户对单个对象和组合对象具有一致的访问性。 模板方法（TemplateMethod）模式：定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤。 策略（Strategy）模式：定义了一系列算法，并将每个算法封装起来，使它们可以相互替换，且算法的改变不会影响使用算法的客户。 命令（Command）模式：将一个请求封装为一个对象，使发出请求的责任和执行请求的责任分割开。 职责链（Chain of Responsibility）模式：把请求从链中的一个对象传到下一个对象，直到请求被响应为止。通过这种方式去除对象之间的耦合。 状态（State）模式：允许一个对象在其内部状态发生改变时改变其行为能力。 观察者（Observer）模式：多个对象间存在一对多关系，当一个对象发生改变时，把这种改变通知给其他多个对象，从而影响其他对象的行为。 中介者（Mediator）模式：定义一个中介对象来简化原有对象之间的交互关系，降低系统中对象间的耦合度，使原有对象之间不必相互了解。 迭代器（Iterator）模式：提供一种方法来顺序访问聚合对象中的一系列数据，而不暴露聚合对象的内部表示。 访问者（Visitor）模式：在不改变集合元素的前提下，为一个集合中的每个元素提供多种访问方式，即每个元素有多个访问者对象访问。 备忘录（Memento）模式：在不破坏封装性的前提下，获取并保存一个对象的内部状态，以便以后恢复它。 解释器（Interpreter）模式：提供如何定义语言的文法，以及对语言句子的解释方法，即解释器。 开闭原则定义软件实体应当对扩展开放、对修改关闭。 软件实体： 项目中划分出的模块 类与接口 方法 开闭原则的含义是：当应用的需求改变时，在不修改软件实体的源代码或者二进制代码的前提下，可以扩展模块的功能，使其满足新的需求。 作用开闭原则是面向对象程序设计的终极目标，它使软件实体拥有一定的适应性和灵活性的同时具备稳定性和延续性。具体来说，其作用如下。 对软件测试的影响软件遵守开闭原则的话，软件测试时只需要对扩展的代码进行测试就可以了，因为原有的测试代码仍然能够正常运行。 可以提高代码的可复用性粒度越小，被复用的可能性就越大；在面向对象的程序设计中，根据原子和抽象编程可以提高代码的可复用性。 可以提高软件的可维护性遵守开闭原则的软件，其稳定性高和延续性强，从而易于扩展和维护。 里式替换原则定义继承必须确保超类所拥有的性质在子类中仍然成立 作用 里氏替换原则是实现开闭原则的重要方式之一。 它克服了继承中重写父类造成的可复用性变差的缺点。 它是动作正确性的保证。即类的扩展不会给已有的系统引入新的错误，降低了代码出错的可能性。 实现方法里氏替换原则通俗来讲就是：子类可以扩展父类的功能，但不能改变父类原有的功能。也就是说：子类继承父类时，除添加新的方法完成新增功能外，尽量不要重写父类的方法。 依赖倒置原则定义高层模块不应该依赖低层模块，两者都应该依赖其抽象；抽象不应该依赖细节，细节应该依赖抽象。其核心思想是：要面向接口编程，不要面向实现编程。依赖倒置原则是实现开闭原则的重要途径之一，它降低了客户与实现模块之间的耦合。由于在软件设计中，细节具有多变性，而抽象层则相对稳定，因此以抽象为基础搭建起来的架构要比以细节为基础搭建起来的架构要稳定得多。这里的抽象指的是接口或者抽象类，而细节是指具体的实现类。使用接口或者抽象类的目的是制定好规范和契约，而不去涉及任何具体的操作，把展现细节的任务交给它们的实现类去完成。 作用依赖倒置原则的目的是通过要面向接口的编程来降低类间的耦合性，所以我们在实际编程中只要遵循以下4点，就能在项目中满足这个规则。 每个类尽量提供接口或抽象类，或者两者都具备。 变量的声明类型尽量是接口或者是抽象类。 任何类都不应该从具体类派生。 使用继承时尽量遵循里氏替换原则。 单一职责原则定义规定一个类应该有且仅有一个引起它变化的原因，否则类应该被拆分该原则提出对象不应该承担太多职责，如果一个对象承担了太多的职责，至少存在以下两个缺点： 一个职责的变化可能会削弱或者抑制这个类实现其他职责的能力； 当客户端需要该对象的某一个职责时，不得不将其他不需要的职责全都包含进来，从而造成冗余代码或代码的浪费。 优点单一职责原则的核心就是控制类的粒度大小、将对象解耦、提高其内聚性。如果遵循单一职责原则将有以下优点。 降低类的复杂度。一个类只负责一项职责，其逻辑肯定要比负责多项职责简单得多。 提高类的可读性。复杂性降低，自然其可读性会提高。 提高系统的可维护性。可读性提高，那自然更容易维护了。 变更引起的风险降低。变更是必然的，如果单一职责原则遵守得好，当修改一个功能时，可以显著降低对其他功能的影响。 实现方法单一职责原则是最简单但又最难运用的原则，需要设计人员发现类的不同职责并将其分离，再封装到不同的类或模块中。而发现类的多重职责需要设计人员具有较强的分析设计能力和相关重构经验。下面以大学学生工作管理程序为例介绍单一职责原则的应用。 接口隔离原则定义客户端不应该被迫依赖于它不使用的方法一个类对另一个类的依赖应该建立在最小的接口上 接口隔离原则和单一职责都是为了提高类的内聚性、降低它们之间的耦合性，体现了封装的思想，但两者是不同的： 单一职责原则注重的是职责，而接口隔离原则注重的是对接口依赖的隔离。 单一职责原则主要是约束类，它针对的是程序中的实现和细节；接口隔离原则主要约束接口，主要针对抽象和程序整体框架的构建。 优点接口隔离原则是为了约束接口、降低类对接口的依赖性，遵循接口隔离原则有以下 5 个优点。 将臃肿庞大的接口分解为多个粒度小的接口，可以预防外来变更的扩散，提高系统的灵活性和可维护性。 接口隔离提高了系统的内聚性，减少了对外交互，降低了系统的耦合性。 如果接口的粒度大小定义合理，能够保证系统的稳定性；但是，如果定义过小，则会造成接口数量过多，使设计复杂化；如果定义太大，灵活性降低，无法提供定制服务，给整体项目带来无法预料的风险。 使用多个专门的接口还能够体现对象的层次，因为可以通过接口的继承，实现对总接口的定义。 能减少项目工程中的代码冗余。过大的大接口里面通常放置许多不用的方法，当实现这个接口的时候，被迫设计冗余的代码。 实现方法在具体应用接口隔离原则时，应该根据以下几个规则来衡量。 接口尽量小，但是要有限度。一个接口只服务于一个子模块或业务逻辑。 为依赖接口的类定制服务。只提供调用者需要的方法，屏蔽不需要的方法。 了解环境，拒绝盲从。每个项目或产品都有选定的环境因素，环境不同，接口拆分的标准就不同深入了解业务逻辑。 提高内聚，减少对外交互。使接口用最少的方法去完成最多的事情。 迪米特法则定义只与你的直接朋友交谈，不跟“陌生人”说话。其含义是：如果两个软件实体无须直接通信，那么就不应当发生直接的相互调用，可以通过第三方转发该调用。其目的是降低类之间的耦合度，提高模块的相对独立性。迪米特法则中的“朋友”是指：当前对象本身、当前对象的成员对象、当前对象所创建的对象、当前对象的方法参数等，这些对象同当前对象存在关联、聚合或组合关系，可以直接访问这些对象的方法。 优点迪米特法则要求限制软件实体之间通信的宽度和深度，正确使用迪米特法则将有以下两个优点。 降低了类之间的耦合度，提高了模块的相对独立性。 由于亲合度降低，从而提高了类的可复用率和系统的扩展性。 但是，过度使用迪米特法则会使系统产生大量的中介类，从而增加系统的复杂性，使模块之间的通信效率降低。所以，在釆用迪米特法则时需要反复权衡，确保高内聚和低耦合的同时，保证系统的结构清晰。 实现方法从迪米特法则的定义和特点可知，它强调以下两点： 从依赖者的角度来说，只依赖应该依赖的对象。 从被依赖者的角度说，只暴露应该暴露的方法。 所以，在运用迪米特法则时要注意以下 6 点。 在类的划分上，应该创建弱耦合的类。类与类之间的耦合越弱，就越有利于实现可复用的目标。 在类的结构设计上，尽量降低类成员的访问权限。 在类的设计上，优先考虑将一个类设置成不变类。 在对其他类的引用上，将引用其他对象的次数降到最低。 不暴露类的属性成员，而应该提供相应的访问器（set 和 get 方法）。 谨慎使用序列化（Serializable）功能。 合成复用原则定义合成复用原则又叫组合/聚合复用原则。它要求在软件复用时，要尽量先使用组合或者聚合等关联关系来实现，其次才考虑使用继承关系来实现。如果要使用继承关系，则必须严格遵循里氏替换原则。合成复用原则同里氏替换原则相辅相成的，两者都是开闭原则的具体实现规范。 重要性通常类的复用分为继承复用和合成复用两种，继承复用虽然有简单和易实现的优点，但它也存在以下缺点。 继承复用破坏了类的封装性。因为继承会将父类的实现细节暴露给子类，父类对子类是透明的，所以这种复用又称为“白箱”复用。 子类与父类的耦合度高。父类的实现的任何改变都会导致子类的实现发生变化，这不利于类的扩展与维护。 它限制了复用的灵活性。从父类继承而来的实现是静态的，在编译时已经定义，所以在运行时不可能发生变化。 采用组合或聚合复用时，可以将已有对象纳入新对象中，使之成为新对象的一部分，新对象可以调用已有对象的功能，它有以下优点。 它维持了类的封装性。因为成分对象的内部细节是新对象看不见的，所以这种复用又称为“黑箱”复用。 新旧类之间的耦合度低。这种复用所需的依赖较少，新对象存取成分对象的唯一方法是通过成分对象的接口。 复用的灵活性高。这种复用可以在运行时动态进行，新对象可以动态地引用与成分对象类型相同的对象。 实现方法合成复用原则是通过将已有的对象纳入新对象中，作为新对象的成员对象来实现的，新对象可以调用已有对象的功能，从而达到复用。 七种设计原则总结。开闭原则是总纲，它告诉我们要对扩展开放，对修改关闭；里氏替换原则告诉我们不要破坏继承体系；依赖倒置原则告诉我们要面向接口编程；单一职责原则告诉我们实现类要职责单一；接口隔离原则告诉我们在设计接口的时候要精简单一；迪米特法则告诉我们要降低耦合度；合成复用原则告诉我们要优先使用组合或者聚合关系复用，少用继承关系复用。]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git常用命令]]></title>
+    <url>%2F2019%2F07%2F03%2Fgit-cmd%2F</url>
+    <content type="text"><![CDATA[git 常用命令git add 文件名：追踪指定文件git add .：追踪所有文件git commit -m ‘注释’：提交到本地仓库git push：推送远程仓库git pull：拉取git status：查看当前提交状态git branch：查看分支git branch 分支名：创建分支，不切换git branch -d：删除分支git checkout 分支名：切换到某个分支git checkout -b 分支名：创建分支，并切换到该分支git merge 分支名：合并分支git reset HEAD – file：清空add命令向暂存区提交的关于file文件的修改git reset –hard HEAD：版本回退git reflog：查看所有操作日志git stash：将文件放入暂存区git stash list：查看暂存区文件git stash applly 暂存区id：将文件从暂存区取出git stash pop：将文件从暂存区取出,并删除暂存区的文件git stash clear：清除暂存区git stash branch 分支名称：暂存区创建分支git diff 文件名：比较工作目录和暂存区的不同git diff –cached 文件名：比较暂存区和远程仓库的不同git diff commitID 文件名：比较工作目录和远程仓库的不同git tag -a 标签名称 -m ‘注释’：创建标签git tag：查看标签git push origin 标签名称：推送标签到远程仓库git push origin –tags：推送所有的标签到远程仓库]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[java-ArrayList根据某个属性去重]]></title>
+    <url>%2F2019%2F07%2F01%2Fjava-removal%2F</url>
+    <content type="text"><![CDATA[实体类12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152public class Student&#123; private String sno; private String name; private int sex; public Student(String sno, String name, int sex) &#123; this.sno = sno; this.name = name; this.sex = sex; &#125; public String getName() &#123; return name; &#125; public void setName(String name) &#123; this.name = name; &#125; public String getSno() &#123; return sno; &#125; public void setSno(String sno) &#123; this.sno = sno; &#125; public int getSex() &#123; return sex; &#125; public void setSex(int sex) &#123; this.sex = sex; &#125; @Override public String toString() &#123; return "Student [name=" + name + ", sno=" + sno + ", sex=" + sex + "]"; &#125;&#125; 根据sno字段去重1234567891011List&lt;Student&gt; list = new ArrayList&lt;Student&gt;();for (int i = 0; i &lt; 3; i++)&#123; list.add(new Student("123", "name", i));&#125;list = list.stream().collect( Collectors.collectingAndThen( Collectors.toCollection(() -&gt; new TreeSet&lt;&gt;(Comparator.comparing(Student::getSno))), ArrayList::new));]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[docker部署nginx]]></title>
+    <url>%2F2019%2F06%2F29%2Fdocker-nginx%2F</url>
+    <content type="text"><![CDATA[官方文档链接https://hub.docker.com/_/nginx docker官方镜像(镜像名:版本号，默认latest)1$ docker pull nginx:1.14 查看镜像列表1$ docker images 简单的反向代理新编辑/opt/nginx/myweb.conf配置文件 1234567891011121314upstream myweb &#123; server 47.97.195.164:8080;&#125;server &#123; listen 80; server_name 47.97.195.164; location / &#123; proxy_pass http://myweb; index index.html index.htm; &#125;&#125; 初始化容器 1$ docker run -itd --name=nginx -v /opt/nginx/myweb.conf:/etc/nginx/conf.d/myweb.conf -p 80:80 --privileged=true nginx:1.14 简单的反向代理 + 静态资源服务器新编辑/opt/nginx/myweb.conf配置文件1234567891011121314151617181920upstream myweb &#123; server 47.97.195.164:8080 weight=3; server 47.97.195.165:8080 weight=4;;&#125;server &#123; listen 80; server_name 47.97.195.164; location /zxj/ &#123; alias /opt/resource/myweb/; add_header Access-Control-Allow-Origin *; &#125; location / &#123; proxy_pass http://myweb; index index.html index.htm; &#125;&#125; 修改nginx.conf 这里开启gzip压缩，不用的可以略过这步获取默认的nginx.cong配置文件 1$ docker run -i --rm nginx:1.14 cat /etc/nginx/nginx.conf &gt; nginx.conf 修改如下（gzip） 123456789101112131415161718192021222324252627282930313233343536373839user nginx;worker_processes 1;error_log /var/log/nginx/error.log warn;pid /var/run/nginx.pid;events &#123; worker_connections 1024;&#125;http &#123; include /etc/nginx/mime.types; default_type application/octet-stream; log_format main &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos; &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos; &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;; access_log /var/log/nginx/access.log main; sendfile on; #tcp_nopush on; keepalive_timeout 65; #gzip on; gzip on; gzip_min_length 1k; gzip_buffers 4 16k; #gzip_http_version 1.0; gzip_comp_level 2; gzip_types text/plain application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png; gzip_vary off; gzip_disable &quot;MSIE [1-6]\.&quot;; include /etc/nginx/conf.d/*.conf;&#125; 初始化容器1$ docker run -itd --name=nginx -v /opt/nginx/nginx.conf:/etc/nginx/nginx.conf -v /opt/nginx/myweb.conf:/etc/nginx/conf.d/myweb.conf -v /opt/resource/:/opt/resource -p 80:80 --privileged=true nginx:1.14 注意目录的对应。/opt/resource/：静态资源的目录]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[nginx反向代理、静态资源、负载均衡配置]]></title>
+    <url>%2F2019%2F06%2F21%2Fnginx-proxy-config%2F</url>
+    <content type="text"><![CDATA[nginx配置文件结构 全局块（main）该部分配置主要影响Nginx全局，通常包括下面几个部分： 配置运行Nginx服务器用户（组） worker process数 Nginx进程PID存放路径 错误日志的存放路径 配置文件的引入 events块该部分配置主要影响Nginx服务器与用户的网络连接，主要包括： 设置网络连接的序列化 是否允许同时接收多个网络连接 事件驱动模型的选择 最大连接数的配置 http块 定义MIMI-Type 自定义服务日志 允许sendfile方式传输文件 连接超时时间 单连接请求数上限 server块 配置网络监听 基于名称的虚拟主机配置 基于IP的虚拟主机配置 location块 location配置 请求根目录配置 更改location的URI 网站默认首页配置 简单的配置（基本都是默认配置）123456789101112131415161718192021222324252627282930313233343536373839user nginx;worker_processes 1;error_log /var/log/nginx/error.log warn;pid /var/run/nginx.pid;events &#123; worker_connections 1024;&#125;http &#123; include /etc/nginx/mime.types; default_type application/octet-stream; log_format main &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos; &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos; &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;; access_log /var/log/nginx/access.log main; sendfile on; #tcp_nopush on; keepalive_timeout 65; #gzip on; gzip on; gzip_min_length 1k; gzip_buffers 4 16k; #gzip_http_version 1.0; gzip_comp_level 2; gzip_types text/plain application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png; gzip_vary off; gzip_disable &quot;MSIE [1-6]\.&quot;; include /etc/nginx/conf.d/*.conf;&#125; user nginx：运行Nginx服务器用户/组 user nobody nobody则默认所有用户都可以启动Nginx进程 worker_processes：进程数，Nginx服务器实现并发处理服务的关键 error_log：错误日志存放路径 pid：Nginx进程是作为系统守护进程在运行，需要在某文件中保存当前运行程序的主进程号，Nginx支持该保存文件路径的自定义 worker_connections：每一个worker process可以同时开启的最大连接数 include default_type：MIME-Type指的是网络资源的媒体类型，即前端请求的资源类型，include指令将mime.types文件包含进来 log_format：自定义一个名为main的日志格式 access_log：自定义服务日志 路径+格式（可选） sendfile：开启高效文件传输模式（zero copy 方式），避免内核缓冲区数据和用户缓冲区数据之间的拷贝。 keepalive_timeout：timeout 表示server端对连接的保持时间 gzip：打开gzip压缩 include /etc/nginx/conf.d/*.conf：将其他配置文件包含进来 主要配置（放到上面/etc/nginx/conf.d/目录下）1234567891011121314151617181920upstream myweb &#123; server 192.168.3.125:8081 weight=3; server 192.168.3.124:8081 weight=4;&#125;server &#123; listen 80; server_name 192.168.3.123; location /zxj/ &#123; alias /opt/resource/myweb/; add_header Access-Control-Allow-Origin *; &#125; location / &#123; proxy_pass http://myweb; index index.html index.htm; &#125;&#125; upstream：设置负载均衡服务器，后端服务器地址及权重 server： listen：服务端口 server_name：ip/域名，多个用逗号分开 location：地址匹配设置，支持正则匹配，也支持条件匹配。从上到下优先匹配。 alias：别名。将/zxj/映射目录/opt/resource/myweb/ add_header：允许跨域 proxy_pass：反向代理 上面配置效果： -http://192.168.3.123:80/zxj/xxx =&gt; 192.168.3.123该服务器下 /opt/resource/myweb/目录下xxx -http://192.168.3.123:80/ccc/xxx =&gt; http://192.168.3.124:8081/ccc/xxx 或 http://192.168.3.125:8081/ccc/xxx （比例3:4，ccc处不能为zxj，会匹配到上一个） alias那里也可以用root，试了一些配置路径都没映射成功，马克一下。小服务器，暂时不用考虑性能优化了。有时间再去研究研究~]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+        <tag>proxy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[正向代理和反向代理的区别]]></title>
+    <url>%2F2019%2F06%2F21%2Fnginx-proxy%2F</url>
+    <content type="text"><![CDATA[(转载)正向代理和反向代理的区别 本文转载自：http://blog.csdn.net/m13666368773/article/details/8060481 正向代理是一个位于客户端和原始服务器之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。客户端需要进行一些特别的设置才能使用正向代理。 反向代理服务器根据客户端的请求，从其关联的一组或多组后端服务器（如Web服务器）上获取资源，然后再将这些资源返回给客户端，客户端只会得知反向代理的IP地址，而不知道在代理服务器后面的服务器簇的存在 正向代理和反向代理的区别从用途上来讲：正向代理的典型用途是为在防火墙内的局域网客户端提供访问Internet的途径。正向代理还可以使用缓冲特性减少网络使用率。反向代理的典型用途是将防火墙后面的服务器提供给Internet用户访 问。反向代理还可以为后端的多台服务器提供负载平衡，或为后端较慢的服务器提供缓冲服务。另外，反向代理还可以启用高级URL策略和管理技术，从而使处于不同web服务器系统的web页面同时存在于同一个URL空间下。 从安全性来讲：正向代理允许客户端通过它访问任意网站并且隐藏客户端自身，因此你必须采取安全措施以确保仅为经过授权的客户端提供服务。反向代理对外都是透明的，访问者并不知道自己访问的是一个代理。打个比方，a,b,c三个人，正向代理是a通过b向C借钱，a知道c的存在 。反向代理是a向b借钱，b又向C借，a不知道c的存在。]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+        <tag>proxy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[docker部署springboot]]></title>
+    <url>%2F2019%2F06%2F20%2Fdocker-springboot%2F</url>
+    <content type="text"><![CDATA[将springboot项目打包成jar包略 Dockerfile文件12345678FROM java:8VOLUME /tmpCOPY myweb-0.0.1-SNAPSHOT.jar /opt/web/app.jarCOPY /config/application.yml /opt/web/config/application.ymlWORKDIR /opt/webRUN bash -c "touch /app.jar"EXPOSE 8080ENTRYPOINT ["java", "-jar", "app.jar"] FROM：拉取java8为基础对象VOLUME：指定临时文件目录为/tmp。其效果是在主机 /var/lib/docker 目录下创建了一个临时文件，并链接到容器的/tmp。改步骤是可选的，如果涉及到文件系统的应用就很有必要了。/tmp目录用来持久化到Docker 数据文件夹，因为 Spring Boot 使用的内嵌 Tomcat 容器默认使用/tmp作为工作目录（感觉没什么用啊，在主机该目录下是空的。）COPY：目录下springboot的jar包及配置文件复制到docker镜像内WORKDIR：切换工作目录RUN：执行命令（touch /app.jar）EXPOSE：暴露8080端口ENTRYPOINT：执行命令（java -jar app.jar） 生成镜像将jar包、Dockerfile放到同一目录下（如：/opt/web），yml文件放到下级目录config（与Dockerfile中对应，如：/opt/web/config）生成镜像1$ docker build -t myweb:v1 . -t：代表要构建的镜像的tag，上文的镜像名为myweb，版本为v1 启动容器1$ docker run -itd --name=myweb -p 8080:8080 -v /opt/web/config/application.yml:/opt/web/config/application.yml -v /opt/web/logs/:/opt/web/logs --privileged=true myweb:v1 挂载配置文件和日志文件。其实在生成镜像的时候，就已经把目录下的配置文件放进去了。不过还是需要挂载出来，不然需要改配置的时候太麻烦了，这个基础镜像里没有yum和vim。。。]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>springboot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[docker部署redis]]></title>
+    <url>%2F2019%2F06%2F20%2Fdocker-redis%2F</url>
+    <content type="text"><![CDATA[官方文档链接https://hub.docker.com/_/redis docker官方镜像(镜像名:版本号，默认latest)1$ docker pull redis:5.0.4 docker中国镜像加速(官方镜像慢的话可以用这个)1$ docker pull registry.docker-cn.com/library/redis 查看镜像列表1$ docker images 简单启动容器1$ docker run -itd -p 6380:6379 –name="redis" docker.io/redis -it：以交互模式运行容器，并为容器分配一个伪终端-p：端口映射，主机端口:容器端口–name：为容器指定名称 挂载外部配置及数据持久化修改redis.conf daemonize no：注释掉注释掉注释掉（用守护线程启动） requirepass：设置密码 bind：限制ip访问，注释掉 appendonly yes：数据持久化 启动容器1$ docker run -itd --privileged=true -p 6379:6379 -v /root/redis/redis.conf:/usr/local/etc/redis/redis.conf -v /root/redis/data:/data --name redis redis:5.0.4 redis-server /usr/local/etc/redis/redis.conf --appendonly yes redis-server …：按照指定配置文件启动–appendonly yes：数据持久化上面的配置文件路径（根据实际情况修改）：/root/redis/redis.conf上面的挂载持久化路径（根据实际情况修改）：/root/redis/data]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[docker部署postgres]]></title>
+    <url>%2F2019%2F06%2F19%2Fdocker-postgresql%2F</url>
+    <content type="text"><![CDATA[官方文档链接https://hub.docker.com/_/postgres docker官方镜像(镜像名:版本号，默认latest)1$ docker pull postgres:11 docker中国镜像加速(官方镜像慢的话可以用这个)1$ docker pull registry.docker-cn.com/library/postgres 查看镜像列表1$ docker images 简单启动容器1$ docker run -itd -p 5432:5432 -name="postgres" -e POSTGRES_PASSWORD=zhaoxinjie postgres:11 -it：以交互模式运行容器，并为容器分配一个伪终端-p：端口映射，主机端口:容器端口–name：为容器指定名称-e POSTGRES_PASSWORD：设置环境变量。设置postgres用户的密码 挂载外部配置及数据获取默认的配置文件并放到/root/postgres/目录下1$ docker run -i --rm postgres cat /usr/share/postgresql/postgresql.conf.sample &gt; /root/postgres/postgres.conf 根据自定义配置文件启动及挂载数据到容器外1$ docker run -itd --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=zhaoxinjie --privileged=true -v /root/postgres/data/:/var/lib/postgresql/data -v /root/postgres/postgres.conf:/etc/postgresql/postgresql.conf postgres:11 -c 'config_file=/etc/postgresql/postgresql.conf' –privileged=true：容器内的root拥有真正的权限，否则容器内的root只是外部普通用户权限（不设置启动会报错）-v：挂载文件上面的配置文件路径（根据实际情况修改）：/root/postgres/postgres.conf上面的挂载数据路径（根据实际情况修改）：/root/postgres/data/]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>postgresql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[centos7下docker安装]]></title>
+    <url>%2F2019%2F06%2F19%2Fdocker-install%2F</url>
+    <content type="text"><![CDATA[检查Linux内核版本，docker要求3.10及以上1$ uname -r 安装docker1$ yum install docker 启动docker1$ systemctl start docker 查看docker版本1$ docker -v 停止docker1$ systemctl stop docker 开机启动docker1$ systemctl enable docker]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+</search>
