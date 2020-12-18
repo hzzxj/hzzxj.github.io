@@ -123,3 +123,8 @@ $ docker run -itd --name=nginx -v /opt/nginx/nginx.conf:/etc/nginx/nginx.conf -v
 注意目录的对应。
 /opt/resource/：静态资源的目录
 
+####
+如果访问文件时出现403，有可能是没有该目录的操作权限。
+```
+$ chmod -R 777 /opt/resource
+```
