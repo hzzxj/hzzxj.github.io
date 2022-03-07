@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[linux-查看网络使用情况]]></title>
+    <url>%2F2022%2F03%2F07%2Flinux-nload%2F</url>
+    <content type="text"><![CDATA[安装1yum install nload 使用1nload device eth0 # eth0 网卡名称]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>nload</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[web安全相关-安全测试]]></title>
+    <url>%2F2021%2F05%2F24%2Fweb-security_2%2F</url>
+    <content type="text"><![CDATA[记一次安全测试记录敏感数据加密存储配置文件敏感数据加密存储 SpringBoot使用jasypt加解密密码。 123456&lt;!--jasypt--&gt; &lt;dependency&gt; &lt;groupId&gt;com.github.ulisesbocchio&lt;/groupId&gt; &lt;artifactId&gt;jasypt-spring-boot-starter&lt;/artifactId&gt; &lt;version&gt;2.0.0&lt;/version&gt; &lt;/dependency&gt; 配置文件 12345678# 加密的密钥jasypt: encryptor: password: Hzzxj# 格式：ENC()spring.datasource.username=ENC(EROfZyZxd9F0CYgarXQGtLGFKGzOyD+k)spring.datasource.password=ENC(X02b/D0sOY81kkSV7v4g2/tLw8Ynq6wQ) 1# 获取密文]]></content>
+      <categories>
+        <category>security</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>security</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[web安全相关-http响应头]]></title>
+    <url>%2F2021%2F05%2F24%2Fweb-security_1%2F</url>
+    <content type="text"><![CDATA[WEB项目的HTTP HEADER安全漏洞梳理###这个网址可查询HTTP Header信息 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers X-Content-Type-Options响应头缺失 X-Content-Type-Options HTTP 消息头相当于一个提示标志，被服务器用来提示客户端一定要遵循在 Content-Type 首部中对 MIME 类型 的设定，而不能对其进行修改。这就禁用了客户端的 MIME 类型嗅探行为，换句话说，也就是意味着网站管理员确定自己的设置没有问题。 1response.addHeader(&quot;X-Content-Type-Options&quot;, &quot;nosniff&quot;); X-XSS-Protection响应头缺失 HTTP X-XSS-Protection 响应头是 Internet Explorer，Chrome 和 Safari 的一个特性，当检测到跨站脚本攻击 (XSS (en-US))时，浏览器将停止加载页面。 12response.addHeader(&quot;X-XSS-Protection&quot;, &quot;1; mode=block&quot;); //启动XSS；mode= block:检测到攻击，浏览器将阻止页面的呈现，而不是过滤页面中的XSS内容# response.addHeader(&quot;X-XSS-Protection&quot;, &quot;1; mode=block&quot;); // 禁用XSS 启用了不安全的HTTP方法 检测到目标WEB服务器配置成允许下列其中一个（或多个）HTTP方法：DELETE,SEARCH,COPY,MOVE,PROPFIND,PROPPATCH,MKCOL,LOCK,UNLOCK。 这些方法表示可能在服务器上使用了WebDAV。由于dav方法允许客户端操纵服务器上的文件，如果没有合理配置dav，有可能允许未授权的用户对其进行利用，修改服务器上的文件。 1response.addHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;GET,POST&quot;); // 实际上DELETE等方法还是可以使用。不过漏洞扫描不出来了 123456// 在过滤器中过滤String method = request.getMethod(); if(HttpMethod.GET.toString().equals(method)|| HttpMethod.POST.toString().equals(method))&#123; return true;&#125; return false; X-Frame-Options响应头缺失 The X-Frame-Options HTTP 响应头是用来给浏览器 指示允许一个页面 可否在 , , 或者 中展现的标记。站点可以通过确保网站没有被嵌入到别人的站点里面，从而避免 clickjacking 攻击。 123response.addHeader(&quot;X-Frame-Options&quot;, &quot;DENY&quot;); // 不能被嵌入response.addHeader(&quot;X-Frame-Options&quot;, &quot;SAMEORIGIN&quot;); // 只能嵌入本站。response.addHeader(&quot;X-Frame-Options&quot;, &quot;ALLOW-FROM https://example.com/&quot;); // 指定能嵌入的站点 响应头总结123456789response.addHeader(&quot;X-Frame-Options&quot;, &quot;SAMEORIGIN&quot;);response.addHeader(&quot;X-XSS-Protection&quot;, &quot;1; mode=block&quot;);response.addHeader(&quot;X-Content-Type-Options&quot;, &quot;nosniff&quot;);response.addHeader(&quot;X-Content-Security-Policy&quot;, &quot;default-src &apos;self&apos;&quot;);# otherresponse.addHeader(&quot;Referer-Policy&quot;, &quot;origin&quot;);response.addHeader(&quot;X-Permitted-Cross-Domain-Policies&quot;, &quot;master-only&quot;);response.addHeader(&quot;X-Download-Options&quot;, &quot;noopen&quot;);response.addHeader(&quot;Cache-control&quot;, &quot;public&quot;); 检测到目标主机可能存在缓慢的HTTP拒绝服务攻击 缓慢的HTTP拒绝服务攻击时一种专门针对Web的应用层拒绝服务攻击，攻击者操纵网络上的肉鸡，对目标Web服务器进行海量HTTP请求攻击，直到服务器带宽被打满，造成了拒绝服务。 1234567891011# springboot# application-properties文件增加server.tomcat.max-threads=1000server.tomcat.max-connections=20000# tomact# server.xml &lt;Connector /&gt; 增加maxThreads、connectionTimeout&lt;Connector port=&quot;80&quot; maxHttpHeaderSize=&quot;8192&quot; maxThreads=&quot;1000&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot; enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot; connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; URIEncoding=&quot;UTF-8&quot; maxPostSize=&quot;-1&quot; server=&quot;unknown&quot;/&gt; 检测到目标URL存在http host头攻击漏洞12345678910111213// 头攻击检测 过滤主机名String requestHost = request.getHeader(&quot;host&quot;);if (requestHost != null &amp;&amp; !checkBlankList(requestHost)) &#123; response.setStatus(403); return;&#125;//判断主机是否存在白名单中private boolean checkBlankList(String host)&#123; if(host.contains(&quot;127.0.0.1&quot;))&#123;//此处为自己网站的主机地址 return true; &#125; return false;&#125;]]></content>
+      <categories>
+        <category>security</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>security</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[docker部署vsftpd]]></title>
     <url>%2F2020%2F12%2F16%2Fdocker-vsftpd%2F</url>
     <content type="text"><![CDATA[官方文档链接https://hub.docker.com/r/fauria/vsftpd docker官方镜像(镜像名:版本号，默认latest)1$ docker pull fauria/vsftpd 查看镜像列表1$ docker images 启动容器123456$ docker run -idt -v /var/ftp:/home/vsftpd \ -p 20:20 -p 21:21 -p 21100-21110:21100-21110 \ -e FTP_USER=test -e FTP_PASS=test \ -e PASV_ADDRESS=192.168.3.37 \ -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110 \ --name vsftpd --restart=always fauria/vsftpd -v：把容器内/home/vsftpd挂载到主机/var/ftp目录。这里放到var这个公共目录下，其他部分目录可能会导致客户端连不上（需要设置用户权限）-e FTP_USER=test：设置用户名test-e FTP_PASS=test：设置密码test-e PASV_ADDRESS=192.168.3.37：开启ftp被动模式，值为主机ip-e PASV_MIN_PORT：客户端下载随机端口号下限，与前面docker端口映射一致-e PASV_MAX_PORT：客户端下载随机端口号上限，与前面docker端口映射一致–restart=always：docker重启时重启容器 测试]]></content>
