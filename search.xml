@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[linux-查看网络使用情况]]></title>
     <url>%2F2022%2F03%2F07%2Flinux-nload%2F</url>
-    <content type="text"><![CDATA[安装1yum install nload 使用1nload device eth0 # eth0 网卡名称]]></content>
+    <content type="text"><![CDATA[安装1yum install nload 使用12nload -m # nload device eth0 指定网卡]]></content>
       <categories>
         <category>linux</category>
       </categories>
