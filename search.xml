@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[redis主从-哨兵模式]]></title>
+    <url>%2F2022%2F03%2F15%2Fdocker-redis-master-slave%2F</url>
+    <content type="text"><![CDATA[主从模式1.主从模式的特点 1、master可以进行读写操作，当读写操作导致数据变化时会自动将数据同步给从数据库 2、salve只读 3、master一对多salve 2.redis.conf配置master配置123456789101112131415161718192021222324bind 0.0.0.0 #任意ip都可以连接protected-mode yes #保护模式，需配置bind ip或者设置访问密码；no为关闭，外部网络可以直接访问port 6379 #端口号daemonize no #后台运行，不设置docker会立即退出pidfile /var/run/redis_6379.pid #进程守护文件，就是存放该进程号相关信息的地方requirepass password #密码##### SNAPSHOTTING 默认开启RDBsave 900 1save 300 10save 60 10000dbfilename dump.rdb #rdb文件dir ./ #数据存放目录rdbcompression yes #默认开启数据压缩##### 配置AOFappendonly yes #开启AOFappendfilename &quot;appendonly.aof&quot; #本地数据库文件名appendfsync everysec #更新日志条件 always 总是，每次数据发生变化会立刻写入，性能较差安全性高；everysec 每秒异步写入，默认值； no 不同步auto-aof-rewrite-percentage 100 #自动化重写百分比，100即一倍auto-aof-rewrite-min-size 3gb #当AOF文件大小是上次rewrite后大小的一倍且文件大于3GB时触发masterauth password #从节点密码；后续使用哨兵，master节点挂了，哨兵选举其中一个slave节点升级为master1，等原master服务重新起来后，变更为从节点，需要连接master1，所以这里需要设置从节点的密码。且要保证主、从的密码一致。 slave配置 前面的设置和master一样； port端口后面启动的时候指定 密码要和master的密码一致（后面做哨兵的时候需要） 1234##### slave特殊配置replicaof 10.0.16.4 6379 #主节点信息replica-read-only yes #默认只读masterauth password #主节点密码 3.redis启动命令这里分三个节点，node1为master，node2、node3为slave node11docker run -idt --privileged=true --net=host -v /hzzxj/redis/redis-ms/node1/redis.conf:/usr/local/etc/redis/redis.conf -v /hzzxj/redis/redis-ms/node1/data:/data --name=redis-node1 redis:5.0.14 redis-server /usr/local/etc/redis/redis.conf --port 6379 –net=host #使用主机端口；使用-p 进行端口映射时，测试发现master节点里slave的信息是127.0.0.1 6379，导致后面做哨兵时，哨兵无法获取争取的salve信息–port 6379 #设置启动端口为6379 node21docker run -idt --privileged=true --net=host -v /hzzxj/redis/redis-ms/node2/redis.conf:/usr/local/etc/redis/redis.conf -v /hzzxj/redis/redis-ms/node2/data:/data --name=redis-node2 redis:5.0.14 redis-server /usr/local/etc/redis/redis.conf --port 6380 –port 6380 #设置启动端口为6380；因为在一台服务器上测试，6379已被master占用 node31docker run -idt --privileged=true --net=host -v /hzzxj/redis/redis-ms/node3/redis.conf:/usr/local/etc/redis/redis.conf -v /hzzxj/redis/redis-ms/node3/data:/data --name=redis-node3 redis:5.0.14 redis-server /usr/local/etc/redis/redis.conf --port 6381 –port 6381 #设置启动端口为6381 4.redis主从测试1docker ps -a | grep redis- #查看容器状态 master节点操作 123456789docker exec -it redis-node1 redis-cli -p 6379 #进入容器，redis-cli连接redis；-p 指定端口127.0.0.1:6379&gt; auth password #用户鉴权127.0.0.1:6379&gt; info #查看节点信息127.0.0.1:6379&gt; set redis test #测试写入127.0.0.1:6379&gt; get redis #查询 salve节点操作 可以看到slave能查询到刚刚master节点写入的信息。而且是只读状态。 哨兵模式1.哨兵功能1、监控redis集群是否正常2、master出现故障，自动将slave转化为master3、多哨兵配置的时候，哨兵之间也会自动监控 2.哨兵配置 这里设置三个哨兵，端口分别为26379，26380，26381，其他配置一样 12345678910111213bind 0.0.0.0port 26379 # 由于布置在同一台主机上，所以只能区分端口，分别为26379，26380，26381daemonize nopidfile /var/run/keydb-sentinel.pidlogfile &quot;&quot;dir /tmpprotected-mode yessentinel monitor mymaster 10.0.16.4 6379 2 # mymaster 集群名称；10.0.16.4 maseter节点ip；6379 master端口；2 需要由2个哨兵选举sentinel auth-pass mymaster password # 这一行要写在sentinel monitor后面，否则会报错sentinel down-after-milliseconds mymaster 5000sentinel parallel-syncs mymaster 1sentinel failover-timeout mymaster 180000sentinel deny-scripts-reconfig yes 3.哨兵启动命令 启动哨兵，用的也是redis的镜像 12345678# 哨兵1，端口26379docker run -idt --name=sentinel-26379 --net=host -v /hzzxj/redis/sentinel/26379/sentinel-26379.conf:/usr/local/etc/redis/sentinel.conf redis:5.0.14 redis-sentinel /usr/local/etc/redis/sentinel.conf# 哨兵1，端口26379docker run -idt --name=sentinel-26380 --net=host -v /hzzxj/redis/sentinel/26380/sentinel-26380.conf:/usr/local/etc/redis/sentinel.conf redis:5.0.14 redis-sentinel /usr/local/etc/redis/sentinel.conf# 哨兵1，端口26379docker run -idt --name=sentinel-26381 --net=host -v /hzzxj/redis/sentinel/26381/sentinel-26381.conf:/usr/local/etc/redis/sentinel.conf redis:5.0.14 redis-sentinel /usr/local/etc/redis/sentinel.conf 4.哨兵测试 查看容器状态 启动后哨兵配置文件会自动写入集群信息 哨兵启动日志 这时候把master节点停了；docker stop redis-node1；查看哨兵日志发现master迁移到6380端口的节点上 尝试往6380写入数据，可以写入了。再查看节点信息，成为了master节点，slave剩下6381 重新拉起node1节点，并不会把node1重新做为master，而是作为slave重新加入集群]]></content>
+      <categories>
+        <category>redis</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[linux-查看网络使用情况]]></title>
     <url>%2F2022%2F03%2F07%2Flinux-nload%2F</url>
+    <content type="text"><![CDATA[安装1yum install nload 使用12nload -m # nload device eth0 指定网卡]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>nload</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[linux-查看网络使用情况]]></title>
+    <url>%2F2022%2F03%2F07%2Flinux-user%2F</url>
     <content type="text"><![CDATA[安装1yum install nload 使用12nload -m # nload device eth0 指定网卡]]></content>
       <categories>
         <category>linux</category>
@@ -177,7 +201,7 @@
   <entry>
     <title><![CDATA[docker部署redis]]></title>
     <url>%2F2019%2F06%2F20%2Fdocker-redis%2F</url>
-    <content type="text"><![CDATA[官方文档链接https://hub.docker.com/_/redis docker官方镜像(镜像名:版本号，默认latest)1$ docker pull redis:5.0.4 docker中国镜像加速(官方镜像慢的话可以用这个)1$ docker pull registry.docker-cn.com/library/redis 查看镜像列表1$ docker images 简单启动容器1$ docker run -itd -p 6380:6379 –name="redis" docker.io/redis -it：以交互模式运行容器，并为容器分配一个伪终端-p：端口映射，主机端口:容器端口–name：为容器指定名称 挂载外部配置及数据持久化修改redis.conf daemonize no：注释掉注释掉注释掉（用守护线程启动） requirepass：设置密码 bind：限制ip访问，注释掉 appendonly yes：数据持久化 启动容器1$ docker run -itd --privileged=true -p 6379:6379 -v /root/redis/redis.conf:/usr/local/etc/redis/redis.conf -v /root/redis/data:/data --name redis redis:5.0.4 redis-server /usr/local/etc/redis/redis.conf --appendonly yes redis-server …：按照指定配置文件启动–appendonly yes：数据持久化上面的配置文件路径（根据实际情况修改）：/root/redis/redis.conf上面的挂载持久化路径（根据实际情况修改）：/root/redis/data]]></content>
+    <content type="text"><![CDATA[1.官方文档链接https://hub.docker.com/_/redis 2.docker官方镜像(镜像名:版本号，默认latest)12docker pull redis:5.0.14docker pull registry.docker-cn.com/library/redis:5.0.14 #docker中国镜像加速 3.简单启动容器1docker run -itd -p 6380:6379 –name="redis" docker.io/redis -it：以交互模式运行容器，并为容器分配一个伪终端-p：端口映射，主机端口:容器端口–name：为容器指定名称 4.挂载外部配置及数据持久化redis.conf 下载https://redis.io/topics/config 修改redis.conf bind 0.0.0.0 #任意ip都可以连接 protected-mode yes #保护模式，需配置bind ip或者设置访问密码；no为关闭，外部网络可以直接访问 port 6379 #端口号 daemonize no #后台运行，不设置docker会立即退出 pidfile /var/run/redis_6379.pid #进程守护文件，就是存放该进程号相关信息的地方 requirepass zhaoxinjie #密码 SNAPSHOTTING 默认开启RDB save 900 1 save 300 10 save 60 10000 dbfilename dump.rdb #rdb文件 dir ./ #数据存放目录 rdbcompression yes #默认开启数据压缩 配置AOF appendonly yes #开启AOF appendfilename “appendonly.aof” #本地数据库文件名 appendfsync everysec #更新日志条件 always 总是，每次数据发生变化会立刻写入，性能较差安全性高；everysec 每秒异步写入，默认值； no 不同步 auto-aof-rewrite-percentage 100 #自动化重写百分比，100即一倍 auto-aof-rewrite-min-size 3gb #当AOF文件大小是上次rewrite后大小的一倍且文件大于3GB时触发 启动容器1docker run -idt --privileged=true -p 6379:6379 -v /hzzxj/redis/redis-ms/node1/redis.conf:/usr/local/etc/redis/redis.conf -v /hzzxj/redis/redis-ms/node1/data:/data --name=redis-node1 redis:5.0.14 redis-server /usr/local/etc/redis/redis.conf redis-server /usr/local/etc/redis/redis.conf #按照指定配置文件启动/hzzxj/redis/redis-ms/node1/redis.conf:/usr/local/etc/redis/redis.conf #挂载配置文件 主机：容器/hzzxj/redis/redis-ms/node1/data:/data #挂载数据存放目录 主机：容器 测试12345docker ps -a | grep node1 #查看容器运行状态docker exec -it redis-node1 redis-cli -h 127.0.0.1 -p 6379 #进入容器使用redis-cli命令 -h -p 可省略127.0.0.1:6379&gt; AUTH password #鉴权]]></content>
       <categories>
         <category>docker</category>
       </categories>
